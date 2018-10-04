@@ -1,0 +1,34 @@
+.ta-c{
+	text-align: center;
+}
+.ta-r{
+	text-align: right;
+}
+.dis-bk{
+	display: block;
+}
+.dis-bk-full{
+	display: block;
+	width: 100%;
+}
+
+.line-light{
+	padding: 0px 6px;
+    color: #ddd;
+}
+
+.default-tb-pic{
+	width: 20px;
+	height: 20px;
+}
+.wk_brk{
+	word-break: break-all;
+}
+
+@media screen and (max-width: 768px) {
+	.default-tb-pic{
+	width: 20px;
+	height: 20px;
+}
+
+}
