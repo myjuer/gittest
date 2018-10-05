@@ -24,6 +24,12 @@
 .wk_brk{
 	word-break: break-all;
 }
+.fc-green{
+	color: green;
+}
+.fc-red{
+	color: #f00;
+}
 
 @media screen and (max-width: 768px) {
 	.default-tb-pic{

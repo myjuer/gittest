@@ -41,7 +41,7 @@
                    <span class="btn badge bg-red @if ($one->status==1) hide @endif" data-status="2" data-id="{{$one->id}}">禁止</span>
                   </a>
                   </td>
-                  <td><span class="ta-c dis-bk"><a href="user_edit">编辑</a><span class="line-light">-</span><a>删除</a></span></td>
+                  <td><span class="ta-c dis-bk"><a href="user_edit/{{$one->id}}/update">编辑</a><span class="line-light">-</span><a>删除</a></span></td>
                   <td>
                     <span class="ta-c dis-bk">
                       <input type="checkbox">

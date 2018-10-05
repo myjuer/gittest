@@ -1,33 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>网络后台管理</title>
-  <!-- Js and Css Files -->
-<?php @include('pagehead.php');?>
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-<?php @include('main_header.php');?>
-
-
-<?php @include('pagesidebar.php');?>
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        账号列表
-        <small>账号管理</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> 系统信息</a></li>
-        <li class="active">账号管理</li>
-      </ol>
-    </section>
+@extends('admin.com.pginfo')
+@section('pgtitle','操作提示')   <!-- 设置页面标题 -->
+@section('content')
 
     <!-- Main content -->
     <section class="content">
@@ -40,29 +13,42 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <div class="alert alert-danger alert-dismissible">
-                <h4><i class="icon fa fa-ban"></i> 请不要删除最后一个账号，否则系统将无法登录！</h4>
-                <a href="<?php echo site_url('admin/user_edit')?>">如果页面没有自动跳转，请点击这里！</a>
-              </div>
-              <div class="alert alert-warning alert-dismissible">
+           @if ($list->msg=='ok')
+                <div class="alert alert-success alert-dismissible">
+                  <h4><i class="icon fa fa-check"></i> 操作成功！</h4>
+                  <a href="{{$list->url}}">如果页面没有自动跳转，请点击这里！ <span class="showsecond"></span></a>
+                </div>
+            @elseif ($list->msg=='failed')
+                <div class="alert alert-warning alert-dismissible">
                 <h4><i class="icon fa fa-warning"></i> 操作失败！</h4>
-                <a href="<?php echo site_url('admin/user_edit')?>">如果页面没有自动跳转，请点击这里！</a>
+                <a href="{{$list->url}}">如果页面没有自动跳转，请点击这里！ <span class="showsecond"></span></a>
               </div>
-              <div class="alert alert-success alert-dismissible">
-                <h4><i class="icon fa fa-check"></i> 操作成功！</h4>
-                <a href="<?php echo site_url('admin/user_edit')?>">如果页面没有自动跳转，请点击这里！</a>
+             @elseif ($list->msg=='other')
+                 <div class="alert alert-danger alert-dismissible">
+                <h4><i class="icon fa fa-ban"></i> {{$list->text}}</h4>
+                <a href="{{$list->url}}">如果页面没有自动跳转，请点击这里！ <span class="showsecond"></span></a>
               </div>
+             @endif 
+
             </div>
             <!-- /.box-body -->
           </div>
     </section>
+
     <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+@endsection
+@section('extjs')
+ <script type="text/javascript">
+  var i = 6;
+  setInterval(function(){
+    i--;
+    $('.showsecond').html(i+'秒后跳转');
+    if(i<2){
+    window.location.href="{{$list->url}}";
+   }
+  },1000) 
+</script> 
+@endsection
 
-<?php @include('pagefoot.php');?>
-
-</body>
-</html>
 
 

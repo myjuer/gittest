@@ -55,15 +55,27 @@
 					console.log(res);
 				}
 			}
-				//console.log(typeof res);
-				/*function(){
-					console.log(res);
-				}*/
 			},
 			timeout:1000
 		})
-		//console.log(ops.url)
-		//return this;
+	},
+	'checkpwdconfirm':function(){
+		console.log('aa');
+		if($('.check-pwd').find('input').val()==$('.check-pwd-confirm').find('input').val()){
+			$('.check-pwd-confirm').find('.msg').removeClass('fa-remove');
+			$('.check-pwd-confirm').find('.msg').removeClass('fc-red');
+			$('.check-pwd-confirm').find('.msg').addClass('fa-check');
+			$('.check-pwd-confirm').find('.msg').addClass('fc-green');
+			$('.check-pwd-confirm').find('.msg').html(' 密码一致');
+			return true;
+		}else{
+			$('.check-pwd-confirm').find('.msg').removeClass('fa-check');
+			$('.check-pwd-confirm').find('.msg').removeClass('fc-green');
+			$('.check-pwd-confirm').find('.msg').addClass('fa-remove');
+			$('.check-pwd-confirm').find('.msg').addClass('fc-red');
+			$('.check-pwd-confirm').find('.msg').html(' 密码不一致');
+			return false;
+		}
 	}
 	});
 })(jQuery)

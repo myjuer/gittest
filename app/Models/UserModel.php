@@ -17,7 +17,11 @@ function updataData($data=array()){
 function getData($data){
 	$rs = $this->inits($data['conditions']);
 	if($rs){
-		return $rs->pluck($data['callback'])->first();
+		if($data['callback']!=''){
+			return $rs->pluck($data['callback'])->first();
+		}else{
+			return $rs->first();
+		}
 	}else{
 		return $this ->get();
 	}
