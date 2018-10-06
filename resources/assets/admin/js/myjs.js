@@ -79,3 +79,23 @@
 	}
 	});
 })(jQuery)
+$(document).ready(function(){
+ $('.makeselect input[type="checkbox"]').iCheck({
+     checkboxClass: 'icheckbox_minimal',
+       radioClass: 'iradio_minimal',
+      increaseArea: '20%' // optional
+    });
+
+    //Enable check and uncheck all functionality
+    $(".checkbox-toggle").on('ifChanged',function () {
+      var clicks = $(this).data('clicks');
+      if (clicks) {
+        //Uncheck all checkboxes
+      $(".makeselect input[type='checkbox']").iCheck("uncheck");
+      } else {
+        //Check all checkboxes
+       $(".makeselect input[type='checkbox']").iCheck("check");
+      }
+      $(this).data("clicks", !clicks);
+    });
+})

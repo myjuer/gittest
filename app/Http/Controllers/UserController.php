@@ -1,20 +1,51 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\UserModel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Validator;
 class UserController extends Controller{
-	function index(){
-		$list = UserModel::all();
-		return view('admin.user',['list'=>$list]);
+	function index(Request $info){
+		//$list = UserModel::all();
+		$list = UserModel::paginate(10);
+		$paginate = true;
+		$kwd='';
+		if($info->ismethod('post')){
+			if($info->route('action')=='search'){
+				$data['conditions']['username']=$info->input('keyword');
+				$data['callback'] = '';
+				$model = new UserModel();
+				$list = $model->getData($data,2);
+				$kwd = $info->input('keyword');
+				$paginate = false;
+			}
+			if($info->route('action')=='delete'){
+				$users = $info->input('users');
+				foreach ($users as $k => $v) {
+					$data['conditions']['id']=$v;
+					$model = new UserModel();
+					$re = $model->deleteData($data);
+				}
+				if($re){
+				$list->msg = 'ok';
+				$list->url = $info->url();
+				return view('admin.tips',['list'=>$list]);
+			  }else{
+			  	$list->msg = 'failed';
+				$list->url = $info->url();
+				return view('admin.tips',['list'=>$list]);
+			  }
+			}
+		}
+		return view('admin.user',['list'=>$list,'paginate'=>$paginate,'kwd'=>$kwd]);
 	}
 	function user_edit(Request $info,$user_id,$action){
 		$data['conditions']['id']=$user_id;
 		$data['callback'] = '';
-		$list = UserModel::find(1)->getData($data);
-		
+		$model = new UserModel();
+		$list = $model->getData($data);
+		$list  = $list[0];
 		if($info->ismethod('post')){
 		$validator = Validator::make($info->all(), [
            	'username' => 'required|min:5',
@@ -39,7 +70,8 @@ class UserController extends Controller{
 			$data['datas']['username']=$info->input('username');
 			$data['datas']['role']=$info->input('role');
 			$data['datas']['status']=$info->input('status');
-			$re = UserModel::find(1)->updataData($data);
+			$model = new UserModel();
+			$re = $model->updateData($data);
 			if($re){
 				$list->msg = 'ok';
 				$list->url = $info->url();
@@ -56,9 +88,11 @@ class UserController extends Controller{
 		if($b=='ajax_changestatus'){
 			$data['conditions']['id']=$info['id'];
 			$data['datas']['status']=$info['status'];
-			$re = UserModel::find(1)->updataData($data);
+			$model = new UserModel();
+			$re = $model->updateData($data);
 			$data['callback'] = 'status';						 //需要返回的字段
-			$status = UserModel::find(1)->getData($data);
+			$model = new UserModel();
+			$status = $model->getData($data);
 			if($status){
 				$res = '';
 				$res['isok'] = 'ok';   //ajax返回状态

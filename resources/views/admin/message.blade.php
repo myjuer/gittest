@@ -1,32 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>网络后台管理</title>
-  <!-- Js and Css Files -->
-  <link rel="stylesheet" type="text/css" href="/themes/admin/AdminLTE/plugins/iCheck/minimal/minimal.css">
-<link rel="stylesheet" type="text/css" href="/themes/admin/AdminLTE/bower_components/select2/dist/css/select2.min.css">
-@include('admin.pagehead')
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-@include('admin.main_header')
-@include('admin.pagesidebar')
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        资质管理
-        <small>资质列表</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> 系统信息</a></li>
-        <li class="active">资质管理</li>
-      </ol>
-    </section>
-
+@extends('admin.com.pginfo')
+@section('extcss')
+  <link rel="stylesheet" type="text/css" href="{{AD_STYLE}}AdminLTE/plugins/iCheck/minimal/minimal.css">
+<link rel="stylesheet" type="text/css" href="{{AD_STYLE}}AdminLTE/bower_components/select2/dist/css/select2.min.css">
+@endsection
+@section('pgtitle','账号管理')   <!-- 设置页面标题 -->
+@section('content')
     <!-- Main content -->
     <section class="content">
       <!-- Small boxes (Stat box) -->
@@ -66,7 +44,7 @@
                 </tr>
                 <tr>
                   <td>1.</td>
-                  <td><img src="http://127.0.0.1/themes/admin/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle default-tb-pic" alt="User Image" width="100" height="100"></td>
+                  <td><img src="{{AD_STYLE}}AdminLTE/dist/img/user2-160x160.jpg" class="img-circle default-tb-pic" alt="User Image" width="100" height="100"></td>
                   <td>DZ47-63小型断路器</td>
                   <td>小型/微型断路器</td>
                   <td><span class="badge bg-green">首页推荐</span><span class="badge bg-yellow">新品</span></td>
@@ -80,7 +58,7 @@
                 </tr>
                  <tr>
                   <td>2.</td>
-                  <td><img src="http://127.0.0.1/themes/admin/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle default-tb-pic" alt="User Image" width="60" height="60"></td>
+                  <td><img src="{{AD_STYLE}}AdminLTE/dist/img/user2-160x160.jpg" class="img-circle default-tb-pic" alt="User Image" width="60" height="60"></td>
                   <td>DZ47-63小型断路器</td>
                   <td>小型/微型断路器</td>
                   <td><span class="badge bg-green">首页推荐</span><span class="badge bg-yellow">新品</span></td>
@@ -93,7 +71,7 @@
                 </tr>
                   <tr>
                   <td>3.</td>
-                  <td><img src="http://127.0.0.1/themes/admin/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle default-tb-pic" alt="User Image" width="60" height="60"></td>
+                  <td><img src="{{AD_STYLE}}AdminLTE/dist/img/user2-160x160.jpg" class="img-circle default-tb-pic" alt="User Image" width="60" height="60"></td>
                   <td>DZ47-63小型断路器</td>
                   <td>小型/微型断路器</td>
                   <td><span class="badge bg-green">首页推荐</span><span class="badge bg-yellow">新品</span></td>
@@ -106,7 +84,7 @@
                 </tr>
                   <tr>
                   <td>4.</td>
-                  <td><img src="http://127.0.0.1/themes/admin/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle default-tb-pic" alt="User Image" width="60" height="60"></td>
+                  <td><img src="{{AD_STYLE}}AdminLTE/dist/img/user2-160x160.jpg" class="img-circle default-tb-pic" alt="User Image" width="60" height="60"></td>
                   <td>DZ47-63小型断路器</td>
                   <td>小型/微型断路器</td>
                   <td><span class="badge bg-green">首页推荐</span><span class="badge bg-yellow">新品</span></td>
@@ -195,13 +173,11 @@
 
     </section>
     <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-@include('admin.pagefoot')
+@endsection
+@section('extjs')
 <!-- checkbox style pulugins -->
-<script src="/themes/admin/AdminLTE/plugins/iCheck/icheck.js"></script>
-<script src="/themes/admin/AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
+<script src="{{AD_STYLE}}AdminLTE/plugins/iCheck/icheck.js"></script>
+<script src="{{AD_STYLE}}AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
 
 <script>
 $(document).ready(function(){
@@ -240,7 +216,5 @@ $(document).ready(function(){
 
   });
 </script>
-</body>
-</html>
-
+@endsection
 

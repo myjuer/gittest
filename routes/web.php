@@ -23,7 +23,7 @@ Route::get('/admin', function () {
 Route::get('/admin/admin', function () {
     return view('admin.index');
 });
-Route::get('/admin/user', 'userController@index');
+Route::any('/admin/user/{action?}', 'userController@index');
 Route::any('/admin/user/ajax/{ajax_method?}', 'userController@ajax_method');
 Route::any('/admin/user_edit/{user_id}/{action?}', 'userController@user_edit');
 Route::get('/admin/loginlog', 'loginlogController@index');
