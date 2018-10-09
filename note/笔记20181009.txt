@@ -1,0 +1,4 @@
+if($this->where('username',$data['datas']['username'])->exists()){  //添加验证用户名是否存在
+			return 'data_exists';
+		}
+添加：账号添加功能，添加账号重复验证

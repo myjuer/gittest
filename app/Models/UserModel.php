@@ -6,13 +6,27 @@ class UserModel extends Model{
 	protected $table = 'user';
 	protected $guarded=[];  //设置禁止注入字段为空
 	public $timestamps = false; //去除created_at 和 updated_at 字段
-
+public function insertData($data=array()){
+		if($this->where('username',$data['datas']['username'])->exists()){  //添加验证用户名是否存在
+			return 'data_exists';
+		}
+		$maxorder = $this->max('sort');
+		if($data!=''){
+		$data['datas']['sort'] = $maxorder+1;
+		$data['datas']['update_time'] = date('Y-m-d H:i:s',time());
+		return $this->insertGetId($data['datas']);  //插入数据，获取最后一条ID
+	}
+}
 public function updateData($data=array()){
+	if($this->where('id','<>',$data['conditions']['id'])->where('username',$data['datas']['username'])->exists()){  //添加验证用户名是否存在
+			return 'data_exists';
+		}
 		$rs = $this->inits($data['conditions']);
 		if(isset($rs)){
 		return $rs->update($data['datas']);  //更新数据
 	}
 }
+
 public function getData($data,$method='1'){  //1为精确查询、2为模糊查询
 	$rs = $this->inits($data['conditions'],$method);
 	if($rs){

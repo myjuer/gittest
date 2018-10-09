@@ -25,7 +25,7 @@ Route::get('/admin/admin', function () {
 });
 Route::any('/admin/user/{action?}', 'userController@index');
 Route::any('/admin/user/ajax/{ajax_method?}', 'userController@ajax_method');
-Route::any('/admin/user_edit/{user_id}/{action?}', 'userController@user_edit');
+Route::any('/admin/user_edit/{action?}/{id?}', 'userController@user_edit');
 Route::get('/admin/loginlog', 'loginlogController@index');
 Route::get('/admin/product', 'productController@index');
 Route::get('/admin/product_edit', 'productController@product_edit');

@@ -1,0 +1,4 @@
+在public\index.php  中添加常量 AI_ROOT、ADL_PATH等
+添加 resources\assets\common文件夹   //作为前后台公用插件、css、图片的引用路径
+添加 resources\views\admmin\com文件夹 //作为后台公用页面目录
+添加 app\models文件夹 //作为数据库操作模型目录

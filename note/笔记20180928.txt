@@ -1,0 +1,7 @@
+﻿https://www.jianshu.com/p/509a8dd5654e //lavarel servicers 参考
+
+https://blog.csdn.net/woshihaiyong168/article/details/53228598  //lavarel model参考
+
+https://laravelacademy.org/post/8773.html //blade模板使用方式参考
+
+使用model中自定义的方法，需要UserModel::find(1)->getData();   //类似这样的，需要加find(1);

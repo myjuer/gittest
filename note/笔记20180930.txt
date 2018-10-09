@@ -1,0 +1,3 @@
+http://www.cnblogs.com/schaepher/p/5561193.html   //git和github教程
+
+以resource/view/admin/com/pninfo.blade.php 作为公用模板页，其他页面如user页面继承模板，在user里面定义布局，在pninfo模板页面进行显示

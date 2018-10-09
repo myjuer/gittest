@@ -1,0 +1,4 @@
+https://blog.csdn.net/qq_35038153/article/details/78440703  //lavarel表单验证
+https://laravel-china.org/docs/laravel/5.2/validation/1135#validation-quickstart   //lavarel表单验证
+
+https://laravelacademy.org/post/8773.html  //lavarel blade模板教程

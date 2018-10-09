@@ -1,0 +1,23 @@
+protected $guarded=[];  //设置禁止注入字段为空
+public $timestamps = false; //去除created_at 和 updated_at 字段
+
+数据库操作（controler）
+UserModel::find(1)->updataData($data)
+
+数据库操作（model）
+$this->where('id',1);
+return $this->update(array('status'=>3));
+
+
+
+userModel：
+添加
+updataData（）数据库字段更新函数
+getData （）数据库字段查询
+inits（)数据库字段筛选公共函数，可实现多字段结果筛选
+
+usercontrller
+添加
+ajax_method  //ajax请求处理函数，对请求进行验证并返回相应的结果
+
+

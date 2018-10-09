@@ -1,0 +1,6 @@
+lavarel 在进行post请求时，要加上名为_token的表单项目，lavarel对post请求进行验证值为：{{csrf_token()}}
+且，在路由中将get改为post或者any
+
+接收提交信息使用INPUT::get()
+
+$rs->pluck('status')->first() 获取status的第一个值

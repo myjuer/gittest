@@ -28,57 +28,108 @@ class UserController extends Controller{
 					$re = $model->deleteData($data);
 				}
 				if($re){
-				$list->msg = 'ok';
-				$list->url = $info->url();
-				return view('admin.tips',['list'=>$list]);
+					$backs['msg'] = 'ok';
+					$backs['url'] = $info->url();
+				return view('admin.tips',['backs'=>$backs]);
 			  }else{
-			  	$list->msg = 'failed';
-				$list->url = $info->url();
-				return view('admin.tips',['list'=>$list]);
+			  		$backs['msg'] = 'ok';
+					$backs['url'] = $info->url();    //获取当前URL
+				return view('admin.tips',['backs'=>$backs]);
 			  }
 			}
+
 		}
 		return view('admin.user',['list'=>$list,'paginate'=>$paginate,'kwd'=>$kwd]);
 	}
-	function user_edit(Request $info,$user_id,$action){
-		$data['conditions']['id']=$user_id;
-		$data['callback'] = '';
-		$model = new UserModel();
-		$list = $model->getData($data);
-		$list  = $list[0];
-		if($info->ismethod('post')){
-		$validator = Validator::make($info->all(), [
-           	'username' => 'required|min:5',
-		  	'role' => 'required',
-        ],[
-        	'required'=>':attribute 为必填项目',
-			'min' => ':attribute 必须至少:min个字符',
-			'same' => ':attribute 和 :other 必须相同'
-        ],[
-			'username' => '用户名',
-			'newpassword' => '新密码',
-			]);
-        if ($validator->fails()) {
-            return redirect($info->url())
-                        ->withErrors($validator)
-                        ->withInput();
-        }else{
-        	if($info->input('newpassword')!=''){
-        		$data['datas']['password']=md5($info->input('newpassword'));
-        	}
-        	$data['conditions']['id']=$list->id;
-			$data['datas']['username']=$info->input('username');
-			$data['datas']['role']=$info->input('role');
-			$data['datas']['status']=$info->input('status');
-			$model = new UserModel();
-			$re = $model->updateData($data);
-			if($re){
-				$list->msg = 'ok';
-				$list->url = $info->url();
-				return view('admin.tips',['list'=>$list]);
-			}
-        }
+	function user_edit(Request $info){
+			if($info->route('action')=='update'){
+				$user_id = $info->route('id');
+				$data['conditions']['id']=$user_id;
+				$data['callback'] = '';
+				$model = new UserModel();
+				$list = $model->getData($data)->first();
+			if($info->ismethod('post')){
+			$validator = Validator::make($info->all(), [   //创建自定义表单验证
+	           	'username' => 'required|min:5',
+			  	'role' => 'required',
+	        ],[
+	        	'required'=>':attribute 为必填项目',
+				'min' => ':attribute 必须至少:min个字符',
+				'same' => ':attribute 和 :other 必须相同'
+	        ],[
+				'username' => '用户名',
+				'newpassword' => '新密码',
+				]);
+	        if ($validator->fails()) {
+	            return redirect($info->url())
+	                        ->withErrors($validator)
+	                        ->withInput();
+	        }else{
+	        	if($info->input('newpassword')!=''){
+	        		$data['datas']['password']=md5($info->input('newpassword'));
+	        	}
+	        	$data['conditions']['id']=$list->id;
+				$data['datas']['username']=$info->input('username');
+				$data['datas']['role']=$info->input('role');
+				$data['datas']['status']=$info->input('status');
+				$model = new UserModel();
+				$re = $model->updateData($data);
+				if($re){
+					if($re=='data_exists'){
+					    $validator->errors()->add('data_exists', '用户名已存在!');
+						return redirect($info->url())
+	                        ->withErrors($validator)
+	                        ->withInput();
+					}
+					$backs['msg'] = 'ok';
+					$backs['url'] = $info->url();
+					return view('admin.tips',['backs'=>$backs]);
+				}
+	        }
+		 }
 		}
+		if($info->route('action')=='add'){
+			$list='';
+			if($info->ismethod('post')){
+			$validator = Validator::make($info->all(), [
+	           	'username' => 'required|min:5',
+			  	'newpassword' => 'required',
+	        ],[
+	        	'required'=>':attribute 为必填项目',
+				'min' => ':attribute 必须至少:min个字符',
+				'same' => ':attribute 和 :other 必须相同'
+	        ],[
+				'username' => '用户名',
+				'newpassword' => '密码',
+				]);
+	        if ($validator->fails()) {
+	            return redirect($info->url())
+	                        ->withErrors($validator)
+	                        ->withInput();
+	        }else{
+	        	if($info->input('newpassword')!=''){
+	        		$data['datas']['password']=md5($info->input('newpassword'));
+	        	}
+				$data['datas']['username']=$info->input('username');
+				$data['datas']['role']=$info->input('role');
+				$data['datas']['status']=$info->input('status');
+				$model = new UserModel();
+				$re = $model->insertData($data);
+				if($re){
+					if($re=='data_exists'){
+					    $validator->errors()->add('data_exists', '用户名已存在!');
+						return redirect($info->url())
+	                        ->withErrors($validator)
+	                        ->withInput();
+					}
+					$backs['msg'] = 'ok';
+					$backs['url'] = $info->url();
+					return view('admin.tips',['backs'=>$backs]);
+				}
+	        }
+		 }
+		}
+		
 		return view('admin.user_edit',['list'=>$list]);
 	}
 	function ajax_method($b){

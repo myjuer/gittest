@@ -1,0 +1,27 @@
+﻿在要进行版本控制的目录下右键git bash here，git base 会自动以当前目录为版本控制操作目录
+
+git init 初始化版本库，并加入.git文件夹，里面有config配置等等
+
+git config --global user.name "git用户名"
+
+git config --global user.email "git邮箱"
+
+ssh-keygen -t rsa -C "git邮箱" 生成 keys，用于在github绑定
+
+ssh -T git@github.com  本地绑定github，当本地和服务器都绑定后，可进行提交代码到服务器里
+
+git remote add origin  git@github.com:myjuer/gittest.git 本地与服务器连接
+
+git status 查看当前版本状态，如果没有编译，会提示需要编译
+
+git add -A 添加文件或者修改部分进存储库
+
+git commit -m "版本名称"  编译版本，添加对应版本号
+
+git log 查看git仓库操作历史、更改历史等
+
+git reset --hard 版本号前7位（版本号从 git log 中取）
+
+git pull origin master  从远处github取出文件到本地
+
+git push -u origin master 将本地版本控制库中的文件提交到远处github仓库中

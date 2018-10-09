@@ -1,0 +1,23 @@
+raphael.min.js   JS矢量图形包
+morris.js   jquery图表插件
+sparkline.js   jquery线状图插件
+jvectormap.js   jQuery矢量SVG地图插件
+jquery-jvectormap-world-mill-en.js 世界地图矢量SVG地图插件
+knob.js  圆形进度条插件
+moment.js  时间处理插件
+daterangepicker.js 时间范围选择器插件
+bootstrap-datepicker.js  bootstrap时间选取插件
+wysihtml5.js   富文本编辑器
+slimscroll.js  滚动条插件
+fastclick.js  解决移动端点击事件延迟机制
+dashboard.js  面板展示
+icheck.js  复选框、单选框插件
+select2.js  下拉框列表插件，带搜索等
+tinymce.js  强大的富文本编辑器
+popup.js  弹出窗口插件
+fancybox  弹出窗口插件
+modernizr.js   用于检测用户浏览器的 HTML5 与 CSS3 特性。
+editor.js  轻量级富文本编辑器
+CKeditor.js 好看的富文本编辑器
+
+http://www.jqueryfuns.com/moban   网站模板

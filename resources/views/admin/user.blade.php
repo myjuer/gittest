@@ -43,7 +43,7 @@
                    <span class="btn badge bg-red @if ($one->status==1) hide @endif" data-status="2" data-id="{{$one->id}}">禁止</span>
                   </a>
                   </td>
-                  <td><span class="ta-c dis-bk"><a href="{{url('admin/user_edit/'.$one->id.'/update')}}">编辑</a><span class="line-light">-</span><a href="#" data-toggle="modal" data-target="#modal-default">删除</a></span></td>
+                  <td><span class="ta-c dis-bk"><a href="{{url('admin/user_edit/update/'.$one->id)}}">编辑</a><span class="line-light">-</span><a href="#" data-toggle="modal" data-target="#modal-default" class="deletethis">删除</a></span></td>
                   <td>
                     <span class="ta-c dis-bk makeselect selitems">
                       <input name="users[]" type="checkbox" value="{{$one->id}}">
@@ -76,7 +76,7 @@
             <!-- /.box-body -->
             <div class="box-footer clearfix">
             	<div class="btn-group">
-                  <a class="btn btn-success" href="{{url('admin/honor_edit')}}">添加用户</a>
+                  <a class="btn btn-success" href="{{url('admin/user_edit/add/')}}">添加用户</a>
                 </div>
 
               <div class="btn-group">
@@ -109,6 +109,9 @@ $(document).ready(function(){
   $('.changestatus').changestatus({
   	token:'{{csrf_token()}}',
   	url:'{{AI_ROOT}}/public/admin/user/ajax/ajax_changestatus'
+  })
+  $('.deletethis').click(function(){
+  	$(this).parent().parent().parent().find('input').iCheck("check");
   })
   $('button[data-action="delete"]').click(function(){
   	if($('.selitems input[type="checkbox"]:checked').length>0){

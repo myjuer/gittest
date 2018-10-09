@@ -13,20 +13,20 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-           @if ($list->msg=='ok')
+           @if ($backs['msg']=='ok')
                 <div class="alert alert-success alert-dismissible">
                   <h4><i class="icon fa fa-check"></i> 操作成功！</h4>
-                  <a href="{{$list->url}}">如果页面没有自动跳转，请点击这里！ <span class="showsecond"></span></a>
+                  <a href="{{$backs['url']}}">如果页面没有自动跳转，请点击这里！ <span class="showsecond"></span></a>
                 </div>
-            @elseif ($list->msg=='failed')
+            @elseif ($backs['msg']=='failed')
                 <div class="alert alert-warning alert-dismissible">
                 <h4><i class="icon fa fa-warning"></i> 操作失败！</h4>
-                <a href="{{$list->url}}">如果页面没有自动跳转，请点击这里！ <span class="showsecond"></span></a>
+                <a href="{{$backs['url']}}">如果页面没有自动跳转，请点击这里！ <span class="showsecond"></span></a>
               </div>
-             @elseif ($list->msg=='other')
+             @elseif ($backs['msg']=='other')
                  <div class="alert alert-danger alert-dismissible">
-                <h4><i class="icon fa fa-ban"></i> {{$list->text}}</h4>
-                <a href="{{$list->url}}">如果页面没有自动跳转，请点击这里！ <span class="showsecond"></span></a>
+                <h4><i class="icon fa fa-ban"></i> {{$backs->text}}</h4>
+                <a href="{{$backs['url']}}">如果页面没有自动跳转，请点击这里！ <span class="showsecond"></span></a>
               </div>
              @endif 
 
@@ -44,7 +44,7 @@
     i--;
     $('.showsecond').html(i+'秒后跳转');
     if(i<2){
-    window.location.href="{{$list->url}}";
+    window.location.href="{{$backs['url']}}";
    }
   },1000) 
 </script> 

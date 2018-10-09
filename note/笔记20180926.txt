@@ -1,0 +1,2 @@
+成功将后台移植入lavarel，路由、控制器、视图运行正常
+修复responsivefilemanage排序按钮无法点击-》jquery版本由3切换至2.1，解决问题
