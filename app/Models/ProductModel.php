@@ -2,8 +2,8 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-class UserModel extends Model{
-	protected $table = 'user';
+class ProductModel extends Model{
+	protected $table = 'product';
 	protected $guarded=[];  //设置禁止注入字段为空
 	public $timestamps = false; //去除created_at 和 updated_at 字段
 public function insertData($data=array()){

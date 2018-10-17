@@ -43,7 +43,7 @@
                    <span class="btn badge bg-red @if ($one->status==1) hide @endif" data-status="2" data-id="{{$one->id}}">禁止</span>
                   </a>
                   </td>
-                  <td><span class="ta-c dis-bk"><a href="{{url('admin/user_edit/update/'.$one->id)}}">编辑</a><span class="line-light">-</span><a href="#" data-toggle="modal" data-target="#modal-default" class="deletethis">删除</a></span></td>
+                  <td><span class="ta-c dis-bk"><a href="{{url('admin/user_edit/update/'.$one->id)}}">编辑</a><span class="line-light">-</span><a href="#" data-toggle="modal" data-target="#modal-default" data-action="deletethis">删除</a></span></td>
                   <td>
                     <span class="ta-c dis-bk makeselect selitems">
                       <input name="users[]" type="checkbox" value="{{$one->id}}">
@@ -103,31 +103,17 @@
 @endsection
 @section('extjs')
 <!-- checkbox style pulugins -->
-<script src="{{AD_STYLE}}AdminLTE/plugins/iCheck/icheck.js"></script>
+
 <script>
 $(document).ready(function(){
   $('.changestatus').changestatus({
   	token:'{{csrf_token()}}',
   	url:'{{AI_ROOT}}/public/admin/user/ajax/ajax_changestatus'
   })
-  $('.deletethis').click(function(){
-  	$(this).parent().parent().parent().find('input').iCheck("check");
-  })
-  $('button[data-action="delete"]').click(function(){
-  	if($('.selitems input[type="checkbox"]:checked').length>0){
-  			 var form = $('<form action=\"{{url("admin/user/delete")}}\"></form>');
-			  form.attr('class','hide');
-			  form.attr('method','post');
-			  $('.selitems input[type="checkbox"]:checked').each(function(i,j){
-			  		form.append($(this));
-			  })
-			  form.append('<input type="text" name="_token" value="{{csrf_token()}}">');
-			$('body').append(form);
-			form.submit();
-  	}else{
-  		//alert();
-  	}
-  })
+  $().deleteData({
+  	'pg':"{{url('admin/user/delete')}}",
+  	'csrf_token':"{{csrf_token()}}",
+  });
  
 });
 </script>

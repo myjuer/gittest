@@ -49,10 +49,11 @@
 				console.log(e.status);
 			},
 			success:function(res){
+				console.log(res);
 				if(res.isok=='ok'){
 				if(typeof opss.func=='function'){
 					opss.func();
-					console.log(res);
+					
 				}
 			}
 			},
@@ -76,6 +77,30 @@
 			$('.check-pwd-confirm').find('.msg').html(' 密码不一致');
 			return false;
 		}
+	},
+	'deleteData':function(ops){
+		  ops=$.extend({
+		  	'pg':'',
+		  	'csrf_token':''
+		  },ops)
+		    $('a[data-action="deletethis"]').click(function(){
+			  	$(this).parent().parent().parent().find('input').iCheck("check");
+			  })
+		  $('button[data-action="delete"]').click(function(){
+		  	if($('.selitems input[type="checkbox"]:checked').length>0){
+		  			 var form = $('<form action=\"'+ops.pg+'\"></form>');
+					  form.attr('class','hide');
+					  form.attr('method','post');
+					  $('.selitems input[type="checkbox"]:checked').each(function(i,j){
+					  		form.append($(this));
+					  })
+					  form.append('<input type="text" name="_token" value="'+ops.csrf_token+'">');
+					$('body').append(form);
+					form.submit();
+		  	}else{
+		  		//alert();
+		  	}
+  })
 	}
 	});
 })(jQuery)

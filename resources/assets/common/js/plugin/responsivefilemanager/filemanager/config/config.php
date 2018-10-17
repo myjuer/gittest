@@ -54,6 +54,7 @@ define('DEBUG_ERROR_MESSAGE', true); // TRUE or FALSE
 |    |   |   |   |- responsivefilemanager
 |    |   |   |   |   |- plugin.min.js
 */
+//echo realpath(dirname(__FILE__));
 
 $config = array(
 
@@ -78,7 +79,7 @@ $config = array(
 
 	/*
 	*/
-	'upload_dir' => '/upload/',
+	'upload_dir' =>'/upload/',
 	/*
 	|--------------------------------------------------------------------------
 	| relative path from filemanager folder to upload folder
@@ -87,7 +88,7 @@ $config = array(
 	| with final /
 	|
 	*/
-	'current_path' => './../../../../../../../../../../upload/',
+	'current_path' =>  '../../../../../../../upload/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -98,7 +99,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => '/upload/',
+	'thumbs_base_path' =>  '/upload/',
 	 /*
 	|--------------------------------------------------------------------------
 	| mime file control to define files extensions

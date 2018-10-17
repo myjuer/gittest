@@ -1,0 +1,2 @@
+https://laravelacademy.org/post/769.html     //容器、依赖注入讲解
+修改responsivefilemanage include.js加入改变图片路径

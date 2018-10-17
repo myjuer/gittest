@@ -1,34 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>网络后台管理</title>
-  <!-- Js and Css Files -->
-  <link rel="stylesheet" type="text/css" href="/themes/admin/AdminLTE/plugins/iCheck/minimal/minimal.css">
-  <link rel="stylesheet" type="text/css" href="/themes/admin/AdminLTE/bower_components/select2/dist/css/select2.min.css">
-  <link rel="stylesheet" type="text/css" href="/themes/admin/js/plugin/popup/magnific-popup.css">
-@include('admin.pagehead')
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-  <div class="wrapper">
-@include('admin.main_header')
-@include('admin.pagesidebar')
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <h1>
-          产品管理
-          <small>产品编辑</small>
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> 系统信息</a></li>
-          <li class="active">产品管理</li>
-        </ol>
-      </section>
-
+@extends('admin.com.pginfo')
+@section('extcss')
+<link rel="stylesheet" type="text/css" href="{{AD_STYLE}}AdminLTE/plugins/iCheck/minimal/minimal.css">
+<link rel="stylesheet" type="text/css" href="{{AD_STYLE}}AdminLTE/bower_components/select2/dist/css/select2.min.css">
+<link rel="stylesheet" type="text/css" href="{{CO_STYLE}}js/plugin/popup/magnific-popup.css">
+@endsection
+@section('pgtitle','产品编辑')   <!-- 设置页面标题 -->
+@section('content')
       <!-- Main content -->
       <section class="content">
         <!-- Small boxes (Stat box) -->
@@ -61,55 +41,21 @@
               </div>
               <div class="form-group">
                 <label>产品图片</label>
+                <div class="input-group input-group-sm">
+                 <input class="form-control input-sm" type="text" id="fieldID"  >
+                    <span class="input-group-btn">
+                      <a class="btn btn-info btn-flat test-popup-link" href="{{CO_STYLE}}js/plugin/responsivefilemanager/filemanager/dialog.php?type=1&field_id=fieldID&multiple=10">选择图片</a>
+                    </span>
+               </div>
+               <div class="margin"></div>
                 <div class="clearfix row" id="sortable">
-                  <div 4iv class="connectedSortable col-lg-1 col-sm-2 col-xs-4">
+                  <div class="col-lg-1 col-sm-2 col-xs-4" id="firstpic">
                     <label class="dis-bk">
-                    <a class="test-popup-link" href="/themes/admin/js/plugin/tinymce/js/tinymce/plugins/responsivefilemanager/filemanager/dialog.php?type=0&editor=mce_0&field_id=fieldID1">
-                      <img class="img-thumbnail dis-bk-full" style="cursor: move;" src="/themes/admin/img/up-default.jpg">
-                    </a>
-                     <input type="text" id="fieldID" hidden>
+                      <img class="img-thumbnail dis-bk-full" style="cursor: move;" src="{{AD_STYLE}}img/up-default.jpg">
                      </label>
-                     <input class="form-control input-sm" type="text" placeholder="图片描述">
-                  </div>
-                 <div class="connectedSortable col-lg-1 col-sm-2 col-xs-4">
-                    <label class="dis-bk">
-                    <a class="test-popup-link" href="/themes/admin/js/plugin/tinymce/js/tinymce/plugins/responsivefilemanager/filemanager/dialog.php?type=0&editor=mce_0&field_id=fieldID1">
-                      <img class="img-thumbnail dis-bk-full" style="cursor: move;" src="/themes/admin/img/up-default.jpg">
-                    </a>
-                     <input type="text" id="fieldID" hidden>
-                     </label>
-                     <input class="form-control input-sm" type="text" placeholder="图片描述">
-                  </div>
-                  <div class="connectedSortable col-lg-1 col-sm-2 col-xs-4">
-                    <label class="dis-bk">
-                    <a class="test-popup-link" href="/themes/admin/js/plugin/tinymce/js/tinymce/plugins/responsivefilemanager/filemanager/dialog.php?type=0&editor=mce_0&field_id=fieldID1">
-                      <img class="img-thumbnail dis-bk-full" style="cursor: move;" src="/themes/admin/img/up-default.jpg">
-                    </a>
-                     <input type="text" id="fieldID" hidden>
-                     </label>
-                     <input class="form-control input-sm" type="text" placeholder="图片描述">
-                  </div>
-                  <div class="connectedSortable col-lg-1 col-sm-2 col-xs-4">
-                    <label class="dis-bk">
-                    <a class="test-popup-link" href="/themes/admin/js/plugin/tinymce/js/tinymce/plugins/responsivefilemanager/filemanager/dialog.php?type=0&editor=mce_0&field_id=fieldID1">
-                      <img class="img-thumbnail dis-bk-full" style="cursor: move;" src="/themes/admin/img/up-default.jpg">
-                    </a>
-                     <input type="text" id="fieldID" hidden>
-                     </label>
-                     <input class="form-control input-sm" type="text" placeholder="图片描述">
-                  </div>
-                  <div class="connectedSortable col-lg-1 col-sm-2 col-xs-4">
-                    <label class="dis-bk">
-                    <a class="test-popup-link" href="/themes/admin/js/plugin/tinymce/js/tinymce/plugins/responsivefilemanager/filemanager/dialog.php?type=0&editor=mce_0&field_id=fieldID1">
-                      <img class="img-thumbnail dis-bk-full" style="cursor: move;" src="/themes/admin/img/up-default.jpg">
-                    </a>
-                     <input type="text" id="fieldID" hidden>
-                     </label>
-                     <input class="form-control input-sm" type="text" placeholder="图片描述">
                   </div>
                 </div>
               </div>
-
               <div class="formgroup">
                <label>产品详情</label>
                <textarea id="editor1" name="editor1" rows="10" cols="80" placeholder="输入产品详情">
@@ -129,14 +75,13 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  @include('admin.pagefoot')
+@endsection
+@section('extjs')
   <!-- checkbox style pulugins -->
-  <script src="/themes/admin/AdminLTE/plugins/iCheck/icheck.js"></script>
-  <script src="/themes/admin/AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
-  <script src='/themes/admin/js/plugin/tinymce/js/tinymce/tinymce.min.js'></script>
-  <script src='/themes/admin/js/plugin/popup/jquery.magnific-popup.min.js'></script>
+  <script src="{{AD_STYLE}}AdminLTE/plugins/iCheck/icheck.js"></script>
+  <script src="{{AD_STYLE}}AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
+  <script src='{{CO_STYLE}}js/plugin/tinymce/tinymce.min.js'></script>
+  <script src='{{CO_STYLE}}js/plugin/popup/jquery.magnific-popup.min.js'></script>
   <script>
 
     $(document).ready(function(){
@@ -157,7 +102,7 @@
     relative_urls: false,
     browser_spellcheck: true,
     filemanager_title: "文件管理",
-    external_filemanager_path: "/themes/admin/js/plugin/tinymce/js/tinymce/plugins/responsivefilemanager/filemanager/",
+    external_filemanager_path: "{{CO_STYLE}}js/plugin/responsivefilemanager/filemanager/",
     file_picker_types: 'file image media',
     file_picker_callback: function(cb, value, meta) {
         var width = window.innerWidth - 30;
@@ -219,7 +164,7 @@
         });
     },
     external_plugins: {
-        "filemanager": "plugins/responsivefilemanager/plugin.min.js?<?php echo time()?>"
+        "filemanager": "../responsivefilemanager/tinymce/plugins/responsivefilemanager/plugin.min.js?<?php echo time()?>"
     },
     codemirror: {
         indentOnInit: true,
@@ -238,13 +183,63 @@
 
       $('.select2').select2();
       $( "#sortable" ).sortable();  //img sort
-     $('.test-popup-link').magnificPopup({
+    
+ $('.test-popup-link').magnificPopup({
       type:'iframe',
     });
+window.parent.responsive_filemanager_callback = function(field_id){
+      var html = '';
+      var imgurl = '{{AD_STYLE}}img/up-default.jpg';
+      var url=jQuery('#'+field_id).val();
+      console.log(typeof url)
+      if(isJsonString(url)){
+     for(var i = 0;i<JSON.parse(url).length;i++){
+       imgurl = JSON.parse(url)[i];
+       html += '<div class="connectedSortable col-lg-1 col-sm-2 col-xs-4">';
+       html += '<label class="dis-bk img-thumbnail-box pos-r">';
+       html += '<img class="img-thumbnail dis-bk-full" style="cursor: move;" src="'+imgurl+'?'+i+'">';
+       html += '<span class="hover-bottom dis-bk ta-c" data-action="delete-this-img"><i class="fa fa-trash"> </i></span>';
+       html += '</label>';
+       html += '<input class="form-control input-sm hide" type="text" value="'+imgurl+'">';
+       html += '<input class="form-control input-sm" type="text" placeholder="图片描述">';
+       html += '</div>';
+      }
+    }else{
+       imgurl = url;
+       html += '<div class="connectedSortable col-lg-1 col-sm-2 col-xs-4">';
+       html += '<label class="dis-bk img-thumbnail-box pos-r">';
+       html += '<img class="img-thumbnail dis-bk-full" style="cursor: move;" src="'+imgurl+'">';
+       html += '<span class="hover-bottom dis-bk ta-c" data-action="delete-this-img"><i class="fa fa-trash"> </i></span>';
+       html += '</label>';
+       html += '<input class="form-control input-sm hide" type="text" value="'+imgurl+'">';
+       html += '<input class="form-control input-sm" type="text" placeholder="图片描述">';
+       html += '</div>';
+      
+    }
+     $('#firstpic').hide();
+       $('#sortable').append(html);
+        $('span[data-action="delete-this-img"]').click(function(){
+          $(this).parent().parent('.connectedSortable').remove();
+         if($('#sortable').find('.connectedSortable').length<1) {
+            $('#firstpic').show();
+          }
+       }); 
+    }
+function isJsonString(str) {
+        try {
+            if (typeof JSON.parse(str) == "object") {
+                return true;
+            }
+        } catch(e) {
+        }
+        return false;
+    }
+ $('span[data-action="delete-this-img"]').click(function(){
+    alert()
+ });   
     });
 
   </script>
-</body>
-</html>
+@endsection
 
 

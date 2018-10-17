@@ -52,6 +52,7 @@ define('AI_ROOT','https://'.$_SERVER['HTTP_HOST']);
 }else{
 define('AI_ROOT','http://'.$_SERVER['HTTP_HOST']);
 }
+//echo $_SERVER['DOCUMENT_ROOT'];
 define('AD_STYLE',AI_ROOT.'/resources/assets/admin/');  //后台主题 路径
 define('CO_STYLE',AI_ROOT.'/resources/assets/common/');  //公用主题 路径
 

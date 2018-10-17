@@ -73,14 +73,16 @@ class UserController extends Controller{
 				$data['datas']['role']=$info->input('role');
 				$data['datas']['status']=$info->input('status');
 				$model = new UserModel();
-				$re = $model->updateData($data);
-				if($re){
-					if($re=='data_exists'){
+				if($model->checkData($data,1)=='data_exists'){  //检查是否存在相同的用户
 					    $validator->errors()->add('data_exists', '用户名已存在!');
 						return redirect($info->url())
 	                        ->withErrors($validator)
 	                        ->withInput();
+					}else{
+						$re = $model->updateData($data);
 					}
+				if($re){
+					
 					$backs['msg'] = 'ok';
 					$backs['url'] = $info->url();
 					return view('admin.tips',['backs'=>$backs]);
@@ -114,14 +116,16 @@ class UserController extends Controller{
 				$data['datas']['role']=$info->input('role');
 				$data['datas']['status']=$info->input('status');
 				$model = new UserModel();
-				$re = $model->insertData($data);
-				if($re){
-					if($re=='data_exists'){
-					    $validator->errors()->add('data_exists', '用户名已存在!');
+				if($model->checkData($data,2)=='data_exists'){    //检查是否存在相同的用户
+					$validator->errors()->add('data_exists', '用户名已存在!');
 						return redirect($info->url())
 	                        ->withErrors($validator)
 	                        ->withInput();
-					}
+				}else{
+					$re = $model->insertData($data);
+				}
+				
+				if($re){
 					$backs['msg'] = 'ok';
 					$backs['url'] = $info->url();
 					return view('admin.tips',['backs'=>$backs]);
@@ -132,8 +136,7 @@ class UserController extends Controller{
 		
 		return view('admin.user_edit',['list'=>$list]);
 	}
-	function ajax_method($b){
-		$info = Input::get();
+	function ajax_method(Request $info,$b){
 		if($info){
 		$re='';
 		if($b=='ajax_changestatus'){

@@ -241,4 +241,6 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{AD_STYLE}}AdminLTE/dist/js/demo.js"></script>
 
+<script src="{{AD_STYLE}}AdminLTE/plugins/iCheck/icheck.js"></script>
+
 <script src="{{AD_STYLE}}js/myjs.js?{{time()}}"></script>
