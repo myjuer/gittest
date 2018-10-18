@@ -13,16 +13,17 @@ class ProductController extends Controller{
 		$kwd='';
 		if($info->ismethod('post')){
 			if($info->route('action')=='search'){
-				$data['conditions']['title']=$info->input('title');
+				$data['conditions']['title']=$info->input('keyword');
 				$data['callback'] = '';
 				$model = new ProductModel();
+				//var_dump($data);
 				$list = $model->getData($data,2);
 				$kwd = $info->input('keyword');
 				$paginate = false;
 			}
 			if($info->route('action')=='delete'){
-				$users = $info->input('users');
-				foreach ($users as $k => $v) {
+				$ids = $info->input('ids');
+				foreach ($ids as $k => $v) {
 					$data['conditions']['id']=$v;
 					$model = new ProductModel();
 					$re = $model->deleteData($data);
@@ -67,10 +68,11 @@ class ProductController extends Controller{
 	        }else{
 	        	$data['conditions']['id']=$list->id;
 				$data['datas']['title']=$info->input('title');
-				$data['datas']['sort']=$info->input('sort');
 				$data['datas']['category']=$info->input('category');
+				$data['datas']['type']=$info->input('type');
 				$data['datas']['img']=$info->input('img');
 				$data['datas']['content']=$info->input('content');
+				$data['datas']['istop']=$info->input('istop');
 				$model = new ProductModel();
 				$re = $model->updateData($data);
 				if($re){
@@ -85,34 +87,29 @@ class ProductController extends Controller{
 			$list='';
 			if($info->ismethod('post')){
 			$validator = Validator::make($info->all(), [
-	           	'username' => 'required|min:5',
-			  	'newpassword' => 'required',
+	           	'title' => 'required',
+			  	'category' => 'required',
 	        ],[
 	        	'required'=>':attribute 为必填项目',
 				'min' => ':attribute 必须至少:min个字符',
 				'same' => ':attribute 和 :other 必须相同'
 	        ],[
-				'username' => '用户名',
-				'newpassword' => '密码',
+				'title' => '产品名称',
+				'category' => '分类',
 				]);
 	        if ($validator->fails()) {
 	            return redirect($info->url())
 	                        ->withErrors($validator)
 	                        ->withInput();
 	        }else{
-				$data['datas']['username']=$info->input('username');
-				$data['datas']['role']=$info->input('role');
-				$data['datas']['status']=$info->input('status');
+				$data['datas']['title']=$info->input('title');
+				$data['datas']['category']=$info->input('category');
+				$data['datas']['type']=$info->input('type');
+				$data['datas']['img']=$info->input('img');
+				$data['datas']['content']=$info->input('content');
+				$data['datas']['istop']=$info->input('istop');
 				$model = new ProductModel();
-				if($model->checkData($data,2)=='data_exists'){    //检查是否存在相同的用户
-					$validator->errors()->add('data_exists', '用户名已存在!');
-						return redirect($info->url())
-	                        ->withErrors($validator)
-	                        ->withInput();
-				}else{
-					$re = $model->insertData($data);
-				}
-				
+				$re = $model->insertData($data);
 				if($re){
 					$backs['msg'] = 'ok';
 					$backs['url'] = $info->url();
@@ -129,16 +126,16 @@ class ProductController extends Controller{
 		$re='';
 		if($b=='ajax_changestatus'){
 			$data['conditions']['id']=$info['id'];
-			$data['datas']['status']=$info['status'];
+			$data['datas']['istop']=$info['status'];
 			$model = new ProductModel();
 			$re = $model->updateData($data);
-			$data['callback'] = 'status';						 //需要返回的字段
+			$data['callback'] = 'istop';						 //需要返回的字段
 			$model = new ProductModel();
-			$status = $model->getData($data);
-			if($status){
+			$istop = $model->getData($data);
+			if($istop){
 				$res = '';
 				$res['isok'] = 'ok';   //ajax返回状态
-				$res['list'] = $status;  //ajax返回数据
+				$res['list'] = $istop;  //ajax返回数据
 				echo json_encode($res);
 			}
 		}

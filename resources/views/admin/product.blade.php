@@ -1,6 +1,7 @@
 @extends('admin.com.pginfo')
 @section('extcss')
 <link rel="stylesheet" type="text/css" href="{{AD_STYLE}}AdminLTE/plugins/iCheck/minimal/minimal.css">
+<link rel="stylesheet" type="text/css" href="{{AD_STYLE}}AdminLTE/bower_components/select2/dist/css/select2.min.css">
 @endsection
 @section('pgtitle','产品管理')   <!-- 设置页面标题 -->
 @section('content')
@@ -24,13 +25,15 @@
             <div class="box-header with-border">
               <h3 class="box-title">产品列表</h3>
               <div class="box-tools">
+              	<form method="post" action="{{url('admin/product/search')}}">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
+                  <input type="text" name="keyword" value="{{$kwd}}" class="form-control pull-right" placeholder="Search">
+                  <input type="text" name="_token" value="{{csrf_token()}}" style="display: none;">
                   <div class="input-group-btn">
                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                   </div>
                 </div>
+                  </form>
               </div>
             </div>
             <!-- /.box-header -->
@@ -41,30 +44,28 @@
                   <th style="width: 10px">#</th>
                   <th>图片</th>
                   <th>产品名称</th>
-                  <th style="width: 20px">排序</th>
+                  <th style="width: 60px">排序</th>
                   <th>产品分类</th>
-                  <th>标注</th>
+                  <th style="width: 80px">标注</th>
                   <th style="width: 120px">操作</th>
                   <th style="width: 40px"><span class="ta-c dis-bk makeselect"><input type="checkbox" class="checkbox-toggle"></th>
                 </tr>
                 @foreach($list as $k1=>$one)
                 <tr>
                    <td>{{$k1+1}}.</td>
-                  <td><img src="AdminLTE/dist/img/user2-160x160.jpg" class="img-circle default-tb-pic" alt="User Image" width="100" height="100"></td>
+                  <td><img src="@if (is_array(json_decode($one->img))) {{json_decode($one->img)[0]}} @else {{AD_STYLE}}img/up-default.jpg @endif" class="" alt="User Image" width="50" height="50"></td>
                   <td>{{$one->title}}</td>
                    <td>{{$one->sort}}</td>
                   <td>{{$one->category}}</td>
                   <td class="changestatus">
                   	<span class="btn badge bg-green @if ($one->istop!=1) hide @endif" data-status="1" data-id="{{$one->id}}">置顶</span>
                    <span class="btn badge bg-red @if ($one->istop==1) hide @endif" data-status="2" data-id="{{$one->id}}">不置顶</span>
-                   <span class="btn badge bg-yellow @if ($one->isnew!=1) hide @endif" data-status="1" data-id="{{$one->id}}">新品</span>
-                   <span class="btn badge bg-red @if ($one->isnew==1) hide @endif" data-status="2" data-id="{{$one->id}}">非新品</span>
                   </td>
-                  <td><a href="{{url('admin/product_edit')}}">编辑</a><span class="line-light">-</span><a>删除</a></td>
+                  <td><a href="{{url('admin/product_edit/update/'.$one->id)}}">编辑</a><span class="line-light">-</span><a href="#" data-toggle="modal" data-target="#modal-default" data-action="deletethis">删除</a></td>
                   <td>
-                   <span class="ta-c dis-bk makeselect selitems">
+                    <span class="ta-c dis-bk makeselect selitems">
                       <input name="ids[]" type="checkbox" value="{{$one->id}}">
-                     </span>
+                     </span> 
                   </td>
                 </tr>
                 @endforeach
@@ -108,7 +109,7 @@
                     <li><a href="#"><i class="glyphicon glyphicon-transfer"></i>移动到</a></li>
                     
                     <li class="divider"></li>
-                    <li><a href="#"><i class="glyphicon glyphicon-trash"></i> 删除</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#modal-default"><i class="glyphicon glyphicon-trash"></i> 删除</a></li>
                   </ul>
                 </div>
             	<ul class="pagination-sm no-margin pull-right">
@@ -123,18 +124,23 @@
 @endsection
 @section('extjs')
 <!-- checkbox style pulugins -->
-<script src="/themes/admin/AdminLTE/plugins/iCheck/icheck.js"></script>
-<script src="/themes/admin/AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
+<script src="{{AD_STYLE}}AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
 
 <script>
 $(document).ready(function(){
-  $('input').iCheck({
-    checkboxClass: 'icheckbox_minimal',
-    radioClass: 'iradio_minimal',
-    increaseArea: '20%' // optional
+	 $().deleteData({
+  	'pg':"{{url('admin/product/delete')}}",
+  	'csrf_token':"{{csrf_token()}}",
   });
    //Initialize Select2 Elements
     $('.select2').select2();
+  $('.changestatus').changestatus({
+  	token:'{{csrf_token()}}',
+  	url:'{{url("admin/product/ajax/ajax_changestatus")}}'
+  })
+
+ 
+ 
 
 });
 </script>

@@ -21,8 +21,8 @@ class UserController extends Controller{
 				$paginate = false;
 			}
 			if($info->route('action')=='delete'){
-				$users = $info->input('users');
-				foreach ($users as $k => $v) {
+				$ids = $info->input('ids');
+				foreach ($ids as $k => $v) {
 					$data['conditions']['id']=$v;
 					$model = new UserModel();
 					$re = $model->deleteData($data);

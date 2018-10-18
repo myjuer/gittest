@@ -55,7 +55,7 @@ public function deleteData($data,$method='1'){  //1为精确查询、2为模糊�
 	}
 }
 public function inits($conditions,$method='1'){//1为精确查询、2为模糊查询
-	if(isset($conditions)){
+	if(is_array($conditions)){
 		if($method==1){
 		$i = 0;
 		foreach($conditions as $k=>$v){

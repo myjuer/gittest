@@ -46,7 +46,7 @@
                   <td><span class="ta-c dis-bk"><a href="{{url('admin/user_edit/update/'.$one->id)}}">编辑</a><span class="line-light">-</span><a href="#" data-toggle="modal" data-target="#modal-default" data-action="deletethis">删除</a></span></td>
                   <td>
                     <span class="ta-c dis-bk makeselect selitems">
-                      <input name="users[]" type="checkbox" value="{{$one->id}}">
+                      <input name="ids[]" type="checkbox" value="{{$one->id}}">
                      </span> 
                   </td>
                 </tr>

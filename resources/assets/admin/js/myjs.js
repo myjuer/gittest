@@ -84,7 +84,7 @@
 		  	'csrf_token':''
 		  },ops)
 		    $('a[data-action="deletethis"]').click(function(){
-			  	$(this).parent().parent().parent().find('input').iCheck("check");
+			  	$(this).parents('tr').find('.selitems').find('input').iCheck("check");
 			  })
 		  $('button[data-action="delete"]').click(function(){
 		  	if($('.selitems input[type="checkbox"]:checked').length>0){
