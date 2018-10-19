@@ -121,6 +121,9 @@ class ProductController extends Controller{
 		
 		return view('admin.product_edit',['list'=>$list]);
 	}
+	function category(){
+		return view('admin.product_cate');
+	}
 	function ajax_method(Request $info,$b){
 		if($info){
 		$re='';

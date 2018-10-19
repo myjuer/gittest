@@ -1,6 +1,6 @@
 @extends('admin.com.pginfo')
 @section('extcss')
-<link rel="stylesheet" type="text/css" href="{{AD_STYLE}}AdminLTE/plugins/iCheck/minimal/minimal.css">
+
 @endsection
 @section('pgtitle','账号管理')   <!-- 设置页面标题 -->
 @section('content')
@@ -9,7 +9,23 @@
       <!-- Small boxes (Stat box) -->
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">后台账号列表</h3>
+              <!-- <h3 class="box-title">后台账号列表</h3> -->
+                 <div class="btn-group">
+                  <a class="btn btn-danger" href="{{url('admin/user_edit/add/')}}"><i class="fa fa-plus"></i> 添加</a>
+                </div>
+
+              <div class="btn-group">
+                  <button type="button" class="btn btn-success"><i class="fa fa-cog"></i> 操作</button>
+                  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#"><i class="glyphicon glyphicon-pushpin"></i>标注</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#" data-toggle="modal" data-target="#modal-default"><i class="glyphicon glyphicon-trash"></i> 删除</a></li>
+                  </ul>
+                </div>
               <div class="box-tools">
               	<form method="post" action="{{url('admin/user/search')}}">
                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -75,22 +91,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-            	<div class="btn-group">
-                  <a class="btn btn-success" href="{{url('admin/user_edit/add/')}}">添加用户</a>
-                </div>
-
-              <div class="btn-group">
-                  <button type="button" class="btn btn-default">批量操作</button>
-                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#"><i class="glyphicon glyphicon-pushpin"></i>标注</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#" data-toggle="modal" data-target="#modal-default"><i class="glyphicon glyphicon-trash"></i> 删除</a></li>
-                  </ul>
-                </div>
+ 
             	<ul class="pagination-sm no-margin pull-right">
             		@if ($paginate) {{$list->links('vendor.pagination.default')}} @endif
             	</ul>

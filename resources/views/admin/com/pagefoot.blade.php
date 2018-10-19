@@ -242,5 +242,9 @@
 <script src="{{AD_STYLE}}AdminLTE/dist/js/demo.js"></script>
 
 <script src="{{AD_STYLE}}AdminLTE/plugins/iCheck/icheck.js"></script>
+<script src="{{AD_STYLE}}AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
+<script src='{{CO_STYLE}}js/plugin/tinymce/tinymce.min.js'></script>
+<script src='{{CO_STYLE}}js/plugin/popup/jquery.magnific-popup.min.js'></script>
+<script src="{{AD_STYLE}}Layui/layui/layui.all.js"></script>
 
 <script src="{{AD_STYLE}}js/myjs.js?{{time()}}"></script>

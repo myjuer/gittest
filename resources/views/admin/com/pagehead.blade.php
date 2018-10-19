@@ -25,6 +25,10 @@
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{AD_STYLE}}AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
+<link rel="stylesheet" type="text/css" href="{{AD_STYLE}}AdminLTE/plugins/iCheck/minimal/minimal.css">
+<link rel="stylesheet" type="text/css" href="{{AD_STYLE}}AdminLTE/bower_components/select2/dist/css/select2.min.css">
+<link rel="stylesheet" type="text/css" href="{{CO_STYLE}}js/plugin/popup/magnific-popup.css">
+<link rel="stylesheet" href="{{AD_STYLE}}Layui/layui/css/layui.css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -34,6 +38,7 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
   
   <!-- Mycss Style -->
   <link rel="stylesheet" href="{{AD_STYLE}}css/style.css?<?php echo time();?>">

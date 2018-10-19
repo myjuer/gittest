@@ -1804,7 +1804,6 @@ var encodeURL,show_animation,hide_animation,apply,apply_none,apply_img,apply_any
 			files = new Array(files);
 		}
 		var urls=returnUrls(files);   //获取URL
-		//console.log(urls);
 
 		var res = JSON.stringify(urls);
 		if(urls.length==1){
@@ -1996,7 +1995,6 @@ var encodeURL,show_animation,hide_animation,apply,apply_none,apply_img,apply_any
 				target.val(res).trigger('change');
 				if(callback==0)
 				{
-					console.log(external);
 					if (typeof windowParent.responsive_filemanager_callback == 'function')
 					{
 
@@ -2126,6 +2124,8 @@ var encodeURL,show_animation,hide_animation,apply,apply_none,apply_img,apply_any
 	}
 	function close_window()
 	{	parent.$.magnificPopup.close();
+		parent.layer.closeAll('iframe');
+
 		if (jQuery('#popup').val() == 1)
 		{
 
