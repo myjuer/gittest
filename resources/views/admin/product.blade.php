@@ -77,7 +77,7 @@
                   	<span class="btn badge bg-yellow @if ($one->istop!=1) hide @endif" data-status="1" data-id="{{$one->id}}"><i class="glyphicon glyphicon-thumbs-up"></i> 推荐</span>
                    <span class="btn badge bg-defult @if ($one->istop==1) hide @endif" data-status="2" data-id="{{$one->id}}"><i class="glyphicon glyphicon-thumbs-up"></i> </span>
                   </td>
-                  <td><img src="@if (is_array(json_decode($one->img))) {{json_decode($one->img)[0]}} @else {{AD_STYLE}}img/up-default.jpg @endif" class="" alt="User Image" width="50" height="50"></td>
+                  <td><img src="@if ($one->img!='[]'&&$one->img!=''&&is_array(json_decode($one->img))) {{json_decode($one->img)[0]}} @else {{AD_STYLE}}img/up-default.jpg @endif" class="" alt="User Image" width="50" height="50"></td>
                   <td>{{$one->title}}</td>
                    <td>{{$one->sort}}</td>
                   <td>{{$one->category}}</td>

@@ -33,111 +33,11 @@
                 <span class="text input-group-sm"><input type="text" class="form-control " value="小型断路器"></span>
                 <!-- Emphasis label -->
                 <small class="label label-success" data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
-                <small class="label label-danger"><i class="fa fa-trash-o"></i> 删除</small>
+                <small class="label label-danger" data-action="delete-sort-item"><i class="fa fa-trash-o"></i> 删除</small>
                 <div class="sortable-list">
-                         <dl class="cate-item pd5-v">
-                      <dd>
-                      <!-- drag handle -->
-                      <span class="handle ui-sortable-handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                      <!-- checkbox -->
-                      <input type="checkbox" value="">
-                      <!-- todo text -->
-                      <span class="text input-group-sm"><input type="text" class="form-control " value="小型断路器"></span>
-                      <!-- Emphasis label -->
-                      <small class="label label-success"  data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
-                      <small class="label label-danger"><i class="fa fa-trash-o"></i> 删除</small>
-                      <div class="sortable-list">
-                        <dl class="cate-item">
-                      <dd>
-                      <!-- drag handle -->
-                      <span class="handle ui-sortable-handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                      <!-- checkbox -->
-                      <input type="checkbox" value="">
-                      <!-- todo text -->
-                      <span class="text input-group-sm"><input type="text" class="form-control " value="小型断路器"></span>
-                      <!-- Emphasis label -->
-                      <small class="label label-success"  data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
-                      <small class="label label-danger"><i class="fa fa-trash-o"></i> 删除</small>
-                      <div class="sortable-list">
-                      </div>
-                    </dd>
-                  </dl>
-                  <dl class="cate-item  pd5-v">
-                      <dd>
-                      <!-- drag handle -->
-                      <span class="handle ui-sortable-handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                      <!-- checkbox -->
-                      <input type="checkbox" value="">
-                      <!-- todo text -->
-                      <span class="text input-group-sm"><input type="text" class="form-control " value="小型断路器"></span>
-                      <!-- Emphasis label -->
-                      <small class="label label-success"  data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
-                      <small class="label label-danger"><i class="fa fa-trash-o"></i> 删除</small>
-                      <div class="sortable-list">
-                        <dl>
-                          
-                        </dl>
-                      </div>
-                    </dd>
-                  
-                  </dl>
-                      </div>
-                    </dd>
-                  
-                  </dl>
-                  <dl class="cate-item  pd5-v">
-                      <dd>
-                      <!-- drag handle -->
-                      <span class="handle ui-sortable-handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                      <!-- checkbox -->
-                      <input type="checkbox" value="">
-                      <!-- todo text -->
-                      <span class="text input-group-sm"><input type="text" class="form-control " value="小型断路器"></span>
-                      <!-- Emphasis label -->
-                      <small class="label label-success"  data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
-                      <small class="label label-danger"><i class="fa fa-trash-o"></i> 删除</small>
-                      <div class="sortable-list">
-                        <dl>
-                          
-                        </dl>
-                      </div>
-                    </dd>
-                  
-                  </dl>
                 </div>
               </dd>
             
-            </dl>
-
-      </li>
-       <li style="">
-            <dl >
-                <dd>
-                <!-- drag handle -->
-                <span class="handle ui-sortable-handle">
-                  <i class="fa fa-ellipsis-v"></i>
-                  <i class="fa fa-ellipsis-v"></i>
-                </span>
-                <!-- checkbox -->
-                <input type="checkbox" value="">
-                <!-- todo text -->
-                <span class="text input-group-sm"><input type="text" class="form-control " value="小型断路器"></span>
-                <!-- Emphasis label -->
-                <small class="label label-success"  data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
-                <small class="label label-danger"><i class="fa fa-trash-o"></i> 删除</small>
-              </dd>
             </dl>
 
       </li>
@@ -228,8 +128,8 @@ $('body').on('click','[data-action="add-sort-item"]',function(){
       html +='</span>';
       html +='<input type="checkbox" value="">';
       html +='<span class="text input-group-sm"><input type="text" class="form-control " value="小型断路器"></span>';
-      html +='<small class="label label-success"  data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>';
-      html +='<small class="label label-danger"><i class="fa fa-trash-o"></i> 删除</small>';
+      html +='<small class="label label-success" data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>';
+      html +='<small class="label label-danger" data-action="delete-sort-item"><i class="fa fa-trash-o"></i> 删除</small>';
       html +='<div class="sortable-list">';
       html +='</div>';
       html +='</dd>';
@@ -241,6 +141,9 @@ $('.sortable-list').sortable();
        radioClass: 'iradio_minimal',
       increaseArea: '20%' // optional
     });
+})
+$('body').on('click','[data-action="delete-sort-item"]',function(){
+  $(this).parent().parent().remove();
 })
 </script>
 
