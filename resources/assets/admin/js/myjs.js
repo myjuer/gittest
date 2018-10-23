@@ -114,6 +114,7 @@ $('.select2').select2();
  $('.test-popup-link').magnificPopup({
       type:'iframe',
 });
+ $('.sortable-list').sortable();
 //Enable check and uncheck all functionality
 $(".checkbox-toggle").on('ifChanged',function () {
   var clicks = $(this).data('clicks');

@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>网络后台管理</title>
   <!-- Js and Css Files -->
-@include('admin.com.pagehead')
+@include('admin.com.comhead')
 @yield('extcss')   <!-- extcss -->
 </head>
 </head>

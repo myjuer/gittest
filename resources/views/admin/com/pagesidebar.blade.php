@@ -38,7 +38,7 @@
             <li><a href="{{url('admin/loginlog')}}"><i class="fa fa-circle-o"></i> 登录日志</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <li class="active treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>栏目设置</span>

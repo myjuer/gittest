@@ -11,6 +11,15 @@
 	display: block;
 	width: 100%;
 }
+.pd10-v{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.pd5-v{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
 
 .line-light{
 	padding: 0px 6px;
@@ -79,6 +88,20 @@
 .layui-ext-class .layui-layer-min cite{background-color: #fff !important;}
 .layui-ext-class .layui-layer-max{background-position: -60px -40px !important; }
 .layui-ext-class .layui-layer-close{background-position: -12px -40px !important;}
+.cate-item{
+	padding-left: 30px;
+}
+.cate-item dd{
+	border-left: 1px solid #ccc;
+}
+.sort-item:hover{
+	outline: 1px solid #f00;
+	cursor: move;
+}
+.todo-list>li .tools{display:inline-block;}
+
+
+
 @media screen and (max-width: 768px) {
 	.default-tb-pic{
 	width: 20px;

@@ -1,34 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>网络后台管理</title>
-  <!-- Js and Css Files -->
-@include('admin.com.pagehead')
+@extends('admin.com.pginfo')
+@section('extcss')
 
-</head>
-@include('admin.com.main_header')
-@include('admin.com.pagesidebar')
-
-<body class="hold-transition skin-blue sidebar-mini">
-
-<div class="wrapper">
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        首页
-        <small>基本信息</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> 系统信息</a></li>
-        <li class="active">系统首页</li>
-      </ol>
-    </section>
-
+@endsection
+@section('pgtitle','账号管理')   <!-- 设置页面标题 -->
+@section('content')
     <!-- Main content -->
     <section class="content">
       <!-- Small boxes (Stat box) -->
@@ -151,12 +126,11 @@
 
     </section>
     <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+@endsection
+@section('extjs')
+<!-- checkbox style pulugins -->
 
-</div>
-@include('admin.com.pagefoot')
-</body>
-</html>
+@endsection
+
 
 
