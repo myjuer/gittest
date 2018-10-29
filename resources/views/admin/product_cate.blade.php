@@ -18,9 +18,9 @@
     <div class="box-body">
       <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
       <ul class="todo-list sortable-list">
-
+@foreach ($list as $k1=>$one)
         <li style="">
-            <dl>
+            <dl  class="cate-item">
                 <dd>
                 <!-- drag handle -->
                 <span class="handle ui-sortable-handle">
@@ -30,25 +30,30 @@
                 <!-- checkbox -->
                 <input type="checkbox" value="">
                 <!-- todo text -->
-                <span class="text input-group-sm"><input type="text" class="form-control " value="小型断路器"></span>
+                <span class="text input-group-sm"><input type="text" class="form-control " value="{{$one['id']}}"></span>
                 <!-- Emphasis label -->
-                <small class="label label-success" data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
-                <small class="label label-danger" data-action="delete-sort-item"><i class="fa fa-trash-o"></i> 删除</small>
+                <small class="bg-green btn badge" data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
+                <small class="bg-red btn badge" data-action="delete-sort-item"><i class="fa fa-trash-o"></i> 删除</small>
                 <div class="sortable-list">
+            
+              
                 </div>
               </dd>
             
             </dl>
 
       </li>
+@endforeach
 </ul>
 </div>
 <div class="box-footer clearfix no-border">
+  <div class="pull-right">
   <div class="btn-group">
-   <a type="button" class="btn btn-success"><i class="fa fa-plus"></i> 添加</a>
+   <a type="button" class="btn btn-success" data-action="add-sort-outitem"><i class="fa fa-plus"></i> 添加</a>
  </div>
  <div class="btn-group">
    <a type="button" class="btn btn-danger"><i class="fa fa-plus"></i> 保存</a>
+ </div>
  </div>
 </div>
 
@@ -120,21 +125,9 @@ $('.treeview1').treeview({
 });
 $('body').on('click','[data-action="add-sort-item"]',function(){
   //alert();
-  var html = '<dl class="cate-item">';
-      html +='<dd>';
-      html +='<span class="handle ui-sortable-handle">';              
-      html +='<i class="fa fa-ellipsis-v"></i>';
-      html +='<i class="fa fa-ellipsis-v"></i>';
-      html +='</span>';
-      html +='<input type="checkbox" value="">';
-      html +='<span class="text input-group-sm"><input type="text" class="form-control " value="小型断路器"></span>';
-      html +='<small class="label label-success" data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>';
-      html +='<small class="label label-danger" data-action="delete-sort-item"><i class="fa fa-trash-o"></i> 删除</small>';
-      html +='<div class="sortable-list">';
-      html +='</div>';
-      html +='</dd>';
-      html +='</dl>';
-  $(this).siblings('.sortable-list').append(html);
+ 
+  var toele = $(this).siblings('.sortable-list');
+  appd_item(toele);
 $('.sortable-list').sortable();
  $('[type="checkbox"]').iCheck({
      checkboxClass: 'icheckbox_minimal',
@@ -142,6 +135,33 @@ $('.sortable-list').sortable();
       increaseArea: '20%' // optional
     });
 })
+$('body').on('click','[data-action="add-sort-outitem"]',function(){
+  var toele = $('.todo-list');
+  appd_item(toele);
+$('.sortable-list').sortable();
+ $('[type="checkbox"]').iCheck({
+     checkboxClass: 'icheckbox_minimal',
+       radioClass: 'iradio_minimal',
+      increaseArea: '20%' // optional
+    });
+})
+function appd_item(ele){
+   var html = '<li><dl class="cate-item">';
+      html +='<dd>';
+      html +='<span class="handle ui-sortable-handle">';              
+      html +='<i class="fa fa-ellipsis-v"></i> ';
+      html +='<i class="fa fa-ellipsis-v"></i>';
+      html +='</span>';
+      html +='<input type="checkbox" value="">';
+      html +='<span class="text input-group-sm"><input type="text" class="form-control " value="小型断路器"></span>';
+      html +='<small class="bg-green btn badge" data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small> ';
+      html +='<small class="bg-red btn badge" data-action="delete-sort-item"><i class="fa fa-trash-o"></i> 删除</small>';
+      html +='<div class="sortable-list">';
+      html +='</div>';
+      html +='</dd>';
+      html +='</dl></li>';
+  ele.append(html);
+}
 $('body').on('click','[data-action="delete-sort-item"]',function(){
   $(this).parent().parent().remove();
 })

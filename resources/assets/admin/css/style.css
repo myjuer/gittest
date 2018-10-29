@@ -39,6 +39,9 @@
 .fc-red{
 	color: #f00;
 }
+.btn-pointer{
+	cursor: pointer;
+}
 .img-thumbnail-box{
 	width: 108px;
 	height: 108px;
@@ -93,6 +96,7 @@
 }
 .cate-item dd{
 	border-left: 1px solid #ccc;
+	margin-top: 5px;
 }
 .sort-item:hover{
 	outline: 1px solid #f00;

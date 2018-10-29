@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\productModel;
+use App\Models\productcateModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Validator;
@@ -69,7 +70,7 @@ class ProductController extends Controller{
 	        	$data['conditions']['id']=$list->id;
 				$data['datas']['title']=$info->input('title');
 				$data['datas']['category']=$info->input('category');
-				$data['datas']['type']=$info->input('type');
+				$data['datas']['itemtype']=$info->input('itemtype');
 				$data['datas']['img']=$info->input('img');
 				$data['datas']['content']=$info->input('content');
 				$data['datas']['istop']=$info->input('istop');
@@ -104,7 +105,7 @@ class ProductController extends Controller{
 	        }else{
 				$data['datas']['title']=$info->input('title');
 				$data['datas']['category']=$info->input('category');
-				$data['datas']['type']=$info->input('type');
+				$data['datas']['itemtype']=$info->input('itemtype');
 				$data['datas']['img']=$info->input('img');
 				$data['datas']['content']=$info->input('content');
 				$data['datas']['istop']=$info->input('istop');
@@ -122,8 +123,61 @@ class ProductController extends Controller{
 		return view('admin.product_edit',['list'=>$list]);
 	}
 	function category(){
-		return view('admin.product_cate');
+		/*$model = new ProductcateModel();
+		$re = $model->getDate(array(),1);
+		$list = $re;
+		//$alist = (array)$list;*/
+		$data['conditions']['id']='';
+		$data['callback'] = '';
+		$model = new ProductcateModel();
+		$list = $model->getData($data)->toarray();
+		//$alist = $this->generateTree($list);
+		foreach ($list as $k1 => $v1) {
+			$list[$v1['id']]=$v1;   //将ID值作为健名，才能无限分级
+
+		}
+
+		$alist = $this->generateTree($list);
+
+	/*	$a ='abc';
+		$b = &$a;
+		$a = 'cc';
+		echo $b;*/
+		//$tree = $this->getTreeData($alist);
+		
+	 // var_dump($alist[0]);
+		return view('admin.product_cate',['list'=>$alist[0]['child']]);
 	}
+	function generateTree($result=array(),$level=5,$a=0){
+		$a++;
+			foreach ($result as $k => $v) {
+				if($a<$level){
+					if(isset($v['parent'])&&$v['parent']!='999'){
+						$result[$v['parent']]['child'][$v['id']]=&$result[$v['id']];
+				        $this->generateTree($result[$v['parent']]['child'],$level,$a);
+
+					}
+				
+			}
+				//$result['child'][$a.'itmes']=$a;	
+			//$this->generateTree($result['child'],$result,$level,$a);	
+			/*foreach ($variable as $key => $value) {
+				# code...
+			}*/
+	
+		}
+		return $result;
+ }
+function test($a=0,&$result=array()){
+$a++;
+if ($a<50) {
+    $result['child'][$a]=$a;
+    $this->test($a,$result['child']);
+}
+echo $a;
+return $result;
+
+}
 	function ajax_method(Request $info,$b){
 		if($info){
 		$re='';

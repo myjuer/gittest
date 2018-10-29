@@ -39,7 +39,7 @@
               </div>
               <div class="form-group">
                 <label for="inputxinghao">产品型号</label>
-                <input type="text" name="type" value="{{$list->type}}" class="form-control" id="inputxinghao" placeholder="输入产品型号">
+                <input type="text" name="itemtype" value="{{$list->type}}" class="form-control" id="inputxinghao" placeholder="输入产品型号">
               </div>
               <div class="form-group">
                 <label>产品图片</label>
@@ -113,7 +113,7 @@
               </div>
               <div class="form-group">
                 <label for="inputxinghao">产品型号</label>
-                <input type="text" name="type" class="form-control" id="inputxinghao" placeholder="输入产品型号">
+                <input type="text" name="itemtype" class="form-control" id="inputxinghao" placeholder="输入产品型号">
               </div>
               <div class="form-group">
                 <label>产品图片</label>
