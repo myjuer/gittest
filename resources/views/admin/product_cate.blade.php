@@ -18,32 +18,12 @@
     <div class="box-body">
       <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
       <ul class="todo-list sortable-list">
-@foreach ($list as $k1=>$one)
-        <li style="">
-            <dl  class="cate-item">
-                <dd>
-                <!-- drag handle -->
-                <span class="handle ui-sortable-handle">
-                  <i class="fa fa-ellipsis-v"></i>
-                  <i class="fa fa-ellipsis-v"></i>
-                </span>
-                <!-- checkbox -->
-                <input type="checkbox" value="">
-                <!-- todo text -->
-                <span class="text input-group-sm"><input type="text" class="form-control " value="{{$one['id']}}"></span>
-                <!-- Emphasis label -->
-                <small class="bg-green btn badge" data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
-                <small class="bg-red btn badge" data-action="delete-sort-item"><i class="fa fa-trash-o"></i> 删除</small>
-                <div class="sortable-list">
-            
-              
-                </div>
-              </dd>
-            
-            </dl>
+<li style="">
 
-      </li>
-@endforeach
+      	<?php echo $list;?>
+   </li>
+ 
+
 </ul>
 </div>
 <div class="box-footer clearfix no-border">

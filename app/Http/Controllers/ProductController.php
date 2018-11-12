@@ -122,32 +122,31 @@ class ProductController extends Controller{
 		
 		return view('admin.product_edit',['list'=>$list]);
 	}
+
+/*	function category(){
+		$data['conditions']['id']='';
+		$data['callback'] = '';
+		$model = new ProductcateModel();
+
+
+		$catehtml = $this->catehtml($alist[0]['child']);
+		return view('admin.product_cate',['list'=>$catehtml]);
+	}*/
 	function category(){
-		/*$model = new ProductcateModel();
-		$re = $model->getDate(array(),1);
-		$list = $re;
-		//$alist = (array)$list;*/
+		
 		$data['conditions']['id']='';
 		$data['callback'] = '';
 		$model = new ProductcateModel();
 		$list = $model->getData($data)->toarray();
-		//$alist = $this->generateTree($list);
 		foreach ($list as $k1 => $v1) {
 			$list[$v1['id']]=$v1;   //将ID值作为健名，才能无限分级
 
 		}
-
 		$alist = $this->generateTree($list);
-
-	/*	$a ='abc';
-		$b = &$a;
-		$a = 'cc';
-		echo $b;*/
-		//$tree = $this->getTreeData($alist);
-		
-	 // var_dump($alist[0]);
-		return view('admin.product_cate',['list'=>$alist[0]['child']]);
-	}
+	
+		$catehtml = $this->catehtml($alist[0]['child']);
+		return view('admin.product_cate',['list'=>$catehtml]);
+	} 
 	function generateTree($result=array(),$level=5,$a=0){
 		$a++;
 			foreach ($result as $k => $v) {
@@ -155,18 +154,120 @@ class ProductController extends Controller{
 					if(isset($v['parent'])&&$v['parent']!='999'){
 						$result[$v['parent']]['child'][$v['id']]=&$result[$v['id']];
 				        $this->generateTree($result[$v['parent']]['child'],$level,$a);
-
 					}
 				
 			}
-				//$result['child'][$a.'itmes']=$a;	
-			//$this->generateTree($result['child'],$result,$level,$a);	
-			/*foreach ($variable as $key => $value) {
-				# code...
-			}*/
-	
+				
 		}
 		return $result;
+		/*if(isset($result[0]['child'])){
+			var_dump($result[0]['child']);
+		}*/
+ }
+
+ function catehtml($data=array()){
+ 	$html='';
+ 	/*foreach ($data as $k => $v) {
+ 		if($v['parent']==0){
+ 			$html .= '<li>'.$v['id'].'</li>';
+ 			if(isset($v['child'])){
+ 			$html .=$this->catehtml($v['child']);
+ 		  }
+ 		}else{
+ 			$html .='<li>-'.$v['id'];
+ 			if(isset($v['child'])){
+ 				$html .=$this->catehtml($v['child']);
+
+ 				//echo $k;
+ 			}
+ 			$html =$html.'</li>';
+ 			
+ 		}*/
+ 		foreach ($data as $k => $v) {
+ 		if($v['parent']==0){
+ 			$html .= '
+            <dl  class="cate-item">
+                <dd>
+                <!-- drag handle -->
+                <span class="handle ui-sortable-handle">
+                  <i class="fa fa-ellipsis-v"></i>
+                  <i class="fa fa-ellipsis-v"></i>
+                </span>
+                <!-- checkbox -->
+                <input type="checkbox" value="">
+                <!-- todo text -->
+                <span class="text input-group-sm"><input type="text" class="form-control " value="'.$v['id'].'"></span>
+                <!-- Emphasis label -->
+                <small class="bg-green btn badge" data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
+                <small class="bg-red btn badge" data-action="delete-sort-item"><i class="fa fa-trash-o"></i> 删除</small>
+               ';if(isset($v['child'])){
+ 				$html .=$this->catehtml($v['child']);
+
+ 				//echo $k;
+ 			}
+
+ 			$html .='
+              </dd>
+            </dl>
+     ';
+ 				
+ 		}else{
+ 			$html .='
+            <dl  class="cate-item">
+                <dd>
+                <!-- drag handle -->
+                <span class="handle ui-sortable-handle">
+                  <i class="fa fa-ellipsis-v"></i>
+                  <i class="fa fa-ellipsis-v"></i>
+                </span>
+                <!-- checkbox -->
+                <input type="checkbox" value="">
+                <!-- todo text -->
+                <span class="text input-group-sm"><input type="text" class="form-control " value="'.$v['id'].'"></span>
+                <!-- Emphasis label -->
+                <small class="bg-green btn badge" data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
+                <small class="bg-red btn badge" data-action="delete-sort-item"><i class="fa fa-trash-o"></i> 删除</small>';
+ 			if(isset($v['child'])){
+ 				$html .=$this->catehtml($v['child']);
+
+ 				//echo $k;
+ 			}
+ 			$html =$html.'
+              </dd>
+            </dl>
+      ';
+ 			
+ 		}
+ 
+/*
+ 		$html .= '<li style="">
+            <dl  class="cate-item">
+                <dd>
+                <!-- drag handle -->
+                <span class="handle ui-sortable-handle">
+                  <i class="fa fa-ellipsis-v"></i>
+                  <i class="fa fa-ellipsis-v"></i>
+                </span>
+                <!-- checkbox -->
+                <input type="checkbox" value="">
+                <!-- todo text -->
+                <span class="text input-group-sm"><input type="text" class="form-control " value="'.$v['id'].'"></span>
+                <!-- Emphasis label -->
+                <small class="bg-green btn badge" data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
+                <small class="bg-red btn badge" data-action="delete-sort-item"><i class="fa fa-trash-o"></i> 删除</small>
+                <div class="sortable-list">';
+                echo $html;
+				if(isset($v['child'])){
+				  $this->catehtml($v['child'],$html);
+				   }
+			
+      			 $html .='</div>
+              </dd>
+            </dl>
+      </li>';*/
+ 	}
+return $html ? '<div class="sortable-list">'.$html.'</div>':$html;
+
  }
 function test($a=0,&$result=array()){
 $a++;
