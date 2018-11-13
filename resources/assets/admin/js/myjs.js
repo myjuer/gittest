@@ -79,14 +79,19 @@
 		}
 	},
 	'deleteData':function(ops){
+
 		  ops=$.extend({
 		  	'pg':'',
 		  	'csrf_token':''
 		  },ops)
-		    $('a[data-action="deletethis"]').click(function(){
-			  	$(this).parents('tr').find('.selitems').find('input').iCheck("check");
+		    $('[data-action="deletethis"]').click(function(){
+            $(this).closest('.selparent').find('.selitems').find('input[type="checkbox"]').iCheck("check");
 			  })
-		  $('button[data-action="delete"]').click(function(){
+        $('[data-action="cancelselect"]').click(function(){
+           $('.selparent').find('.selitems').find('input[type="checkbox"]').iCheck("uncheck");
+        })
+		  $('[data-action="delete"]').click(function(){
+
 		  	if($('.selitems input[type="checkbox"]:checked').length>0){
 		  			 var form = $('<form action=\"'+ops.pg+'\"></form>');
 					  form.attr('class','hide');
@@ -151,7 +156,7 @@ $(".checkbox-toggle").on('ifChanged',function () {
     }],
     plugins: ["advlist autolink link image lists charmap print preview hr anchor pagebreak",
        "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking spellchecker",
-        "table contextmenu directionality emoticons paste textcolor responsivefilemanager code"],
+        "table contextmenu directionality emoticons paste textcolor responsivefilemanager code fullscreen"],
     relative_urls: false,
     browser_spellcheck: true,
     filemanager_title: "文件管理",
@@ -224,8 +229,8 @@ $(".checkbox-toggle").on('ifChanged',function () {
         path: 'CodeMirror'
     },
     image_advtab: true,
-     toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | print preview",
-    toolbar2: "| responsivefilemanager | image | media | link unlink anchor | code",
+     toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fullscreen",
+    toolbar2: "| responsivefilemanager | image media | link unlink anchor | print preview | code",
 });
 window.parent.responsive_filemanager_callback = function(field_id){
       var html = '';

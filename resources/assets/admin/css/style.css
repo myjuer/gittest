@@ -91,6 +91,9 @@
 .layui-ext-class .layui-layer-min cite{background-color: #fff !important;}
 .layui-ext-class .layui-layer-max{background-position: -60px -40px !important; }
 .layui-ext-class .layui-layer-close{background-position: -12px -40px !important;}
+div.mce-fullscreen{
+	z-index: 10000
+}
 .cate-item{
 	padding-left: 30px;
 }

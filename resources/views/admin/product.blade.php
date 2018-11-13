@@ -42,7 +42,7 @@
                     <li><a href="#" data-toggle="modal" data-target="#modal-default"><i class="glyphicon glyphicon-trash"></i> 删除</a></li>
                   </ul>
                 </div>
-                <div  class="btn-group"><a class="btn btn-primary" href="{{url('admin/product_cate')}}" data-action="open-files"><i class="fa fa-pencil"></i> 编辑分类</a></div>
+                <div  class="btn-group"><a class="btn btn-success" href="{{url('admin/product_cate')}}" data-action="open-files"><i class="fa fa-pencil"></i> 编辑分类</a></div>
               <div class="pull-right search-list-form">
               	<form method="post" action="{{url('admin/product/search')}}">
                 <div class="input-group input-group-sm">
@@ -61,28 +61,32 @@
               <table class="table table-bordered">
                 <tbody><tr>
                   <th style="width: 10px">#</th>
-                  <th style="width: 80px">标注</th>
+                  
                   <th style="width: 100px">图片</th>
                   <th>产品名称</th>
                   <th style="width: 60px">排序</th>
                   <th style="width: 200px">产品分类</th>
                   
-                  <th style="width: 120px">操作</th>
+                  <th style="width: 136px">操作</th>
                   <th style="width: 40px"><span class="ta-c dis-bk makeselect"><input type="checkbox" class="checkbox-toggle"></th>
                 </tr>
                 @foreach($list as $k1=>$one)
-                <tr>
+                <tr class="selparent">
                    <td>{{$k1+1}}.</td>
-                    <td class="changestatus">
-                  	<span class="btn badge bg-green @if ($one->istop!=1) hide @endif" data-status="1" data-id="{{$one->id}}"><i class="glyphicon glyphicon-thumbs-up"></i> 推荐</span>
-                   <span class="btn badge bg-defult @if ($one->istop==1) hide @endif" data-status="2" data-id="{{$one->id}}"><i class="glyphicon glyphicon-thumbs-up"></i> </span>
-                  </td>
+                 
                   <td><img src="@if ($one->img!='[]'&&$one->img!=''&&is_array(json_decode($one->img))) {{json_decode($one->img)[0]}} @else {{AD_STYLE}}img/up-default.jpg @endif" class="" alt="User Image" width="50" height="50"></td>
                   <td>{{$one->title}}</td>
                    <td>{{$one->sort}}</td>
                   <td>{{$one->category}}</td>
 
-                  <td><a class="btn badge bg-green" href="{{url('admin/product_edit/update/'.$one->id)}}"><i class="fa fa-pencil" data-toggle="tooltip" title="编辑"></i></a><span class="line-light">-</span><a href="#" class="btn badge bg-red" data-toggle="modal" data-target="#modal-default" data-action="deletethis" title="删除"><i class="glyphicon glyphicon-trash" data-toggle="tooltip" title="删除"></i></a></td>
+                  <td>
+                  	<b class="changestatus">
+                  	<span class="btn badge bg-green @if ($one->istop!=1) hide @endif" data-status="1" data-id="{{$one->id}}"><i class="glyphicon glyphicon-thumbs-up"></i> 推荐</span>
+                   <span class="btn badge bg-defult @if ($one->istop==1) hide @endif" data-status="2" data-id="{{$one->id}}"><i class="glyphicon glyphicon-thumbs-up"></i> </span>
+                  </b>
+                  	<a class="btn badge bg-green" href="{{url('admin/product_edit/update/'.$one->id)}}"><i class="fa fa-pencil" data-toggle="tooltip" title="编辑"></i></a> <a href="#" class="btn badge bg-red" data-toggle="modal" data-target="#modal-default" data-action="deletethis" title="删除"><i class="glyphicon glyphicon-trash" data-toggle="tooltip" title="删除"></i></a>
+                  	
+                  </td>
                   <td>
                     <span class="ta-c dis-bk makeselect selitems">
                       <input name="ids[]" type="checkbox" value="{{$one->id}}">
@@ -103,8 +107,8 @@
                 <p>删除用户后不可恢复，确定删除请点击确认！</p>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary"  data-dismiss="modal" data-action="delete">确认</button>
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal" data-action="cancelselect">取消</button>
+                <button type="button" class="btn btn-success"  data-dismiss="modal" data-action="delete">确认</button>
               </div>
             </div>
             <!-- /.modal-content -->

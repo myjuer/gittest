@@ -46,7 +46,7 @@
                   <th style="width: 10px">#</th>
                   <th>账号</th>
                   <th>状态</th>
-                  <th style="width: 120px"><span class="ta-c dis-bk">操作</span></th>
+                  <th style="width: 76px"><span class="ta-c dis-bk">操作</span></th>
                   <th style="width: 40px"><span class="ta-c dis-bk makeselect"><input type="checkbox" class="checkbox-toggle"></th>
                 </thead>
                 @foreach($list as $k1=>$one)
@@ -59,7 +59,7 @@
                    <span class="btn badge bg-red @if ($one->status==1) hide @endif" data-status="2" data-id="{{$one->id}}">禁止</span>
                   </a>
                   </td>
-                  <td><span class="ta-c dis-bk"><a href="{{url('admin/user_edit/update/'.$one->id)}}">编辑</a><span class="line-light">-</span><a href="#" data-toggle="modal" data-target="#modal-default" data-action="deletethis">删除</a></span></td>
+                  <td><a class="btn badge bg-green" href="{{url('admin/user_edit/update/'.$one->id)}}"><i class="fa fa-pencil" data-toggle="tooltip" title="编辑"></i></a> <a href="#" class="btn badge bg-red" data-toggle="modal" data-target="#modal-default" data-action="deletethis" title="删除"><i class="glyphicon glyphicon-trash" data-toggle="tooltip" title="删除"></i></a></td>
                   <td>
                     <span class="ta-c dis-bk makeselect selitems">
                       <input name="ids[]" type="checkbox" value="{{$one->id}}">

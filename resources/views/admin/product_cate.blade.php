@@ -22,9 +22,28 @@
 
       	<?php echo $list;?>
    </li>
- 
 
 </ul>
+ <div class="modal modal-default fade" id="modal-default" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">确认删除？</h4>
+              </div>
+              <div class="modal-body">
+                <p>删除用户后不可恢复，确定删除请点击确认！</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal" data-action="cancelselect">取消</button>
+                <button type="button" class="btn btn-success"  data-dismiss="modal" data-action="delete">确认</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
 </div>
 <div class="box-footer clearfix no-border">
   <div class="pull-right">
@@ -47,63 +66,16 @@
 
 <!-- checkbox style pulugins -->
 @include('admin.com.comfoot')
-<script src="{{CO_STYLE}}js/plugin/bootstrap-treeview/js/bootstrap-treeview.js"></script>
+
 <script>
- var defaultData = [
- {
-  text: 'Parent 1',
-  href: '#parent1',
-  tags: ['4'],
-  nodes: [
-  {
-    text: 'Child 1',
-    href: '#child1',
-    tags: ['2'],
-    nodes: [
-    {
-      text: 'Grandchild 1',
-      href: '#grandchild1',
-      tags: ['0']
-    },
-    {
-      text: 'Grandchild 2',
-      href: '#grandchild2',
-      tags: ['0']
-    }
-    ]
-  },
-  {
-    text: 'Child 2',
-    href: '#child2',
-    tags: ['0']
-  }
-  ]
-},
-{
-  text: 'Parent 2',
-  href: '#parent2',
-  tags: ['0']
-},
-{
-  text: 'Parent 3',
-  href: '#parent3',
-  tags: ['0']
-},
-{
-  text: 'Parent 4',
-  href: '#parent4',
-  tags: ['0']
-},
-{
-  text: 'Parent 5',
-  href: '#parent5'  ,
-  tags: ['0']
-}
-];
-$('.treeview1').treeview({
-  data: defaultData
-});
-$('body').on('click','[data-action="add-sort-item"]',function(){
+
+
+
+$().deleteData({
+  	'pg':"{{url('admin/product_cate/delete')}}",
+  	'csrf_token':"{{csrf_token()}}",
+  });
+/*$('body').on('click','[data-action="add-sort-item"]',function(){
   //alert();
  
   var toele = $(this).siblings('.sortable-list');
@@ -144,7 +116,7 @@ function appd_item(ele){
 }
 $('body').on('click','[data-action="delete-sort-item"]',function(){
   $(this).parent().parent().remove();
-})
+})*/
 </script>
 
 

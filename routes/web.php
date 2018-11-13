@@ -31,6 +31,7 @@ Route::any('/admin/product/{action?}', 'productController@index');
 Route::any('/admin/product/ajax/{ajax_method?}', 'productController@ajax_method');
 Route::any('/admin/product_edit/{action?}/{id?}', 'productController@product_edit');
 Route::get('/admin/product_cate', 'productController@category');
+Route::any('/admin/product_cate/{action?}', 'productController@category');
 Route::get('/admin/news', 'newsController@index');
 Route::get('/admin/news_edit', 'newsController@news_edit');
 Route::get('/admin/honor', 'honorController@index');

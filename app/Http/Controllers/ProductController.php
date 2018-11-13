@@ -9,7 +9,7 @@ use Validator;
 class ProductController extends Controller{
 			function index(Request $info){
 		//$list = ProductModel::all();
-		$list = ProductModel::paginate(10);
+		$list = ProductModel::paginate(5);
 		$paginate = true;
 		$kwd='';
 		if($info->ismethod('post')){
@@ -32,10 +32,6 @@ class ProductController extends Controller{
 				if($re){
 					$backs['msg'] = 'ok';
 					$backs['url'] = $info->url();
-				return view('admin.tips',['backs'=>$backs]);
-			  }else{
-			  		$backs['msg'] = 'ok';
-					$backs['url'] = $info->url();    //获取当前URL
 				return view('admin.tips',['backs'=>$backs]);
 			  }
 			}
@@ -132,19 +128,35 @@ class ProductController extends Controller{
 		$catehtml = $this->catehtml($alist[0]['child']);
 		return view('admin.product_cate',['list'=>$catehtml]);
 	}*/
-	function category(){
-		
+	function category(Request $info){
 		$data['conditions']['id']='';
 		$data['callback'] = '';
 		$model = new ProductcateModel();
 		$list = $model->getData($data)->toarray();
 		foreach ($list as $k1 => $v1) {
 			$list[$v1['id']]=$v1;   //将ID值作为健名，才能无限分级
-
 		}
 		$alist = $this->generateTree($list);
-	
 		$catehtml = $this->catehtml($alist[0]['child']);
+		if($info->ismethod('post')){
+		if($info->route('action')=='delete'){
+				$ids = $info->input('ids');
+				foreach ($ids as $k => $v) {
+					$data['conditions']['id']=$v;
+					$model = new ProductcateModel();
+					$re = $model->deleteData($data);
+				}
+				if($re){
+					$backs['msg'] = 'ok';
+					$backs['url'] = $info->url();
+				return view('admin.tips',['backs'=>$backs]);
+			  }else{
+			  		$backs['msg'] = 'ok';
+					$backs['url'] = $info->url();    //获取当前URL
+				return view('admin.tips',['backs'=>$backs]);
+			  }
+			}
+		}
 		return view('admin.product_cate',['list'=>$catehtml]);
 	} 
 	function generateTree($result=array(),$level=5,$a=0){
@@ -160,33 +172,15 @@ class ProductController extends Controller{
 				
 		}
 		return $result;
-		/*if(isset($result[0]['child'])){
-			var_dump($result[0]['child']);
-		}*/
- }
 
+}
  function catehtml($data=array()){
  	$html='';
- 	/*foreach ($data as $k => $v) {
- 		if($v['parent']==0){
- 			$html .= '<li>'.$v['id'].'</li>';
- 			if(isset($v['child'])){
- 			$html .=$this->catehtml($v['child']);
- 		  }
- 		}else{
- 			$html .='<li>-'.$v['id'];
- 			if(isset($v['child'])){
- 				$html .=$this->catehtml($v['child']);
 
- 				//echo $k;
- 			}
- 			$html =$html.'</li>';
- 			
- 		}*/
  		foreach ($data as $k => $v) {
  		if($v['parent']==0){
  			$html .= '
-            <dl  class="cate-item">
+            <dl  class="cate-item selparent">
                 <dd>
                 <!-- drag handle -->
                 <span class="handle ui-sortable-handle">
@@ -194,16 +188,16 @@ class ProductController extends Controller{
                   <i class="fa fa-ellipsis-v"></i>
                 </span>
                 <!-- checkbox -->
-                <input type="checkbox" value="">
+                <span class="selitems">
+               	 <input name="ids[]" type="checkbox" value="'.$v['id'].'">
+                </span>
                 <!-- todo text -->
-                <span class="text input-group-sm"><input type="text" class="form-control " value="'.$v['id'].'"></span>
+                <span class="text input-group-sm"><input type="text" class="form-control " value="'.$v['title'].'"></span>
                 <!-- Emphasis label -->
                 <small class="bg-green btn badge" data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
-                <small class="bg-red btn badge" data-action="delete-sort-item"><i class="fa fa-trash-o"></i> 删除</small>
+                <small class="bg-red btn badge" data-toggle="modal" data-target="#modal-default" data-action="deletethis"><i class="fa fa-trash-o"></i> 删除</small>
                ';if(isset($v['child'])){
  				$html .=$this->catehtml($v['child']);
-
- 				//echo $k;
  			}
 
  			$html .='
@@ -213,7 +207,7 @@ class ProductController extends Controller{
  				
  		}else{
  			$html .='
-            <dl  class="cate-item">
+            <dl  class="cate-item selparent">
                 <dd>
                 <!-- drag handle -->
                 <span class="handle ui-sortable-handle">
@@ -221,16 +215,17 @@ class ProductController extends Controller{
                   <i class="fa fa-ellipsis-v"></i>
                 </span>
                 <!-- checkbox -->
-                <input type="checkbox" value="">
+                <span class="selitems">
+                <input name="ids[]" type="checkbox" value="'.$v['id'].'">
+                </span>
                 <!-- todo text -->
-                <span class="text input-group-sm"><input type="text" class="form-control " value="'.$v['id'].'"></span>
+                <span class="text input-group-sm"><input type="text" class="form-control " value="'.$v['title'].'"></span>
                 <!-- Emphasis label -->
                 <small class="bg-green btn badge" data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
-                <small class="bg-red btn badge" data-action="delete-sort-item"><i class="fa fa-trash-o"></i> 删除</small>';
+                <small class="bg-red btn badge" data-toggle="modal" data-target="#modal-default" data-action="deletethis"><i class="fa fa-trash-o"></i> 删除</small>';
  			if(isset($v['child'])){
  				$html .=$this->catehtml($v['child']);
 
- 				//echo $k;
  			}
  			$html =$html.'
               </dd>
@@ -238,33 +233,7 @@ class ProductController extends Controller{
       ';
  			
  		}
- 
-/*
- 		$html .= '<li style="">
-            <dl  class="cate-item">
-                <dd>
-                <!-- drag handle -->
-                <span class="handle ui-sortable-handle">
-                  <i class="fa fa-ellipsis-v"></i>
-                  <i class="fa fa-ellipsis-v"></i>
-                </span>
-                <!-- checkbox -->
-                <input type="checkbox" value="">
-                <!-- todo text -->
-                <span class="text input-group-sm"><input type="text" class="form-control " value="'.$v['id'].'"></span>
-                <!-- Emphasis label -->
-                <small class="bg-green btn badge" data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
-                <small class="bg-red btn badge" data-action="delete-sort-item"><i class="fa fa-trash-o"></i> 删除</small>
-                <div class="sortable-list">';
-                echo $html;
-				if(isset($v['child'])){
-				  $this->catehtml($v['child'],$html);
-				   }
-			
-      			 $html .='</div>
-              </dd>
-            </dl>
-      </li>';*/
+
  	}
 return $html ? '<div class="sortable-list">'.$html.'</div>':$html;
 
