@@ -104,7 +104,7 @@
                 <h4 class="modal-title">确认删除？</h4>
               </div>
               <div class="modal-body">
-                <p>删除用户后不可恢复，确定删除请点击确认！</p>
+                <p>删除产品后不可恢复，确定删除请点击确认！</p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal" data-action="cancelselect">取消</button>

@@ -30,11 +30,12 @@
                 <label>产品分类</label>
                 <select name="category" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
                  <!--  <option selected="selected"  disabled="disabled">全部分类</option> -->
-                  <option value="1" @if ($list->category=='1') selected="selected" @endif>小型断路器</option>
+                <!--   <option value="1" @if ($list->category=='1') selected="selected" @endif>小型断路器</option>
                   <option value="2" @if ($list->category=='2') selected="selected" @endif>漏电断路器</option>
                   <option value="3" @if ($list->category=='3') selected="selected" @endif>过欠压保护器</option>
                   <option value="4" @if ($list->category=='4') selected="selected" @endif>墙壁开关</option>
-                  <option value="5" @if ($list->category=='5') selected="selected" @endif>防水插头</option>
+                  <option value="5" @if ($list->category=='5') selected="selected" @endif>防水插头</option> -->
+                 <?php echo $list->cates;?>
                 </select>
               </div>
               <div class="form-group">
@@ -46,7 +47,7 @@
                 <div class="input-group input-group-sm">
                  <input class="form-control input-sm" type="text" name="img" value="{{$list->img}}" id="fieldID"  >
                     <span class="input-group-btn">
-                      <a class="btn btn-info btn-flat" data-action="open-files" href="{{CO_STYLE}}js/plugin/responsivefilemanager/filemanager/dialog.php?type=1&field_id=fieldID&multiple=10">选择图片</a>
+                      <a class="btn btn-info btn-flat" data-action="open-files" href="{{CO_STYLE}}js/plugin/responsivefilemanager/filemanager/dialog.php?type=1&field_id=fieldID&multiple=1">选择图片</a>
                     </span>
                </div>
                <div class="margin"></div>
@@ -104,11 +105,12 @@
                 <label>产品分类</label>
                 <select name="category" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
                  <!--  <option selected="selected"  disabled="disabled">全部分类</option> -->
-                  <option value="1" selected="selected">小型断路器</option>
+                 <!--  <option value="1" selected="selected">小型断路器</option>
                   <option value="2">漏电断路器</option>
                   <option value="3">过欠压保护器</option>
                   <option value="4">墙壁开关</option>
-                  <option value="5">防水插头</option>
+                  <option value="5">防水插头</option> -->
+                  {{$list->cates}}
                 </select>
               </div>
               <div class="form-group">
@@ -120,7 +122,7 @@
                 <div class="input-group input-group-sm">
                  <input class="form-control input-sm" type="text" name="img" id="fieldID"  >
                     <span class="input-group-btn">
-                      <a class="btn btn-info btn-flat"  data-action="open-files" href="{{CO_STYLE}}js/plugin/responsivefilemanager/filemanager/dialog.php?type=1&field_id=fieldID&multiple=10">选择图片</a>
+                      <a class="btn btn-info btn-flat"  data-action="open-files" href="{{CO_STYLE}}js/plugin/responsivefilemanager/filemanager/dialog.php?type=1&field_id=fieldID&multiple=1">选择图片</a>
                     </span>
                </div>
                <div class="margin"></div>

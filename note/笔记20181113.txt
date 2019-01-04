@@ -1,0 +1,26 @@
+删除项目实现方式：
+在被删除项目父标签添加“.selparent”类；
+在被删除项目的复选框（用于指示选择状态的复选框）的父标签添加“.selitems”类；
+在“删除”按钮上加上“data-action=deletethis” data-id="{{id}}"，Id为当前项目的id值，数据库对应；
+在模态弹出框“确认”按钮上加上“data-action=delete”属性；
+在底部添加js方法：
+$().deleteData({
+  	'pg':"{{url('admin/product/delete')}}",
+  	'csrf_token':"{{csrf_token()}}",
+  });
+
+完成上述步骤即可删除当前项目（注：pg所对应的url后台需有相应的方式，从而实现数据库操作删除）
+
+
+改变项目状态实现方式：
+将两个状态用“span”标签包裹；
+在2个span父标签添加类：changestatus；
+在 底部添加js方法：
+  $('.changestatus').changestatus({
+  	token:'{{csrf_token()}}',
+  	url:'{{url("admin/product/ajax/ajax_changestatus")}}'
+  })
+完成上述步骤提交ajax数据至后台，后台需写好相应处理方法即可
+
+
+添加删除分类代码，实现分类连同子类一起删除功能

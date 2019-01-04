@@ -115,7 +115,16 @@ class ProductController extends Controller{
 	        }
 		 }
 		}
-		
+		$model = new ProductcateModel();
+		$catelist = $model->getData($data)->toarray();
+		foreach ($catelist as $k1 => $v1) {
+			$catelist[$v1['id']]=$v1;   //将ID值作为健名，才能无限分级
+		}
+		$alist = $this->generateTree($catelist);
+		$catehtml = $this->catehtml1($alist[0]['child'],$list->category);
+
+		$list->cates = $catehtml;
+		//var_dump($list->cates);
 		return view('admin.product_edit',['list'=>$list]);
 	}
 
@@ -192,14 +201,13 @@ class ProductController extends Controller{
                	 <input name="ids[]" type="checkbox" value="'.$v['id'].'">
                 </span>
                 <!-- todo text -->
-                <span class="text input-group-sm"><input type="text" class="form-control " value="'.$v['title'].'"></span>
+                <span class="text input-group-sm"><input type="text" class="form-control " value="'.$v['title'].'" data-id="'.$v['id'].'" data-parent="'.$v['parent'].'"></span>
                 <!-- Emphasis label -->
                 <small class="bg-green btn badge" data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
                 <small class="bg-red btn badge" data-toggle="modal" data-target="#modal-default" data-action="deletethis"><i class="fa fa-trash-o"></i> 删除</small>
                ';if(isset($v['child'])){
  				$html .=$this->catehtml($v['child']);
  			}
-
  			$html .='
               </dd>
             </dl>
@@ -219,13 +227,12 @@ class ProductController extends Controller{
                 <input name="ids[]" type="checkbox" value="'.$v['id'].'">
                 </span>
                 <!-- todo text -->
-                <span class="text input-group-sm"><input type="text" class="form-control " value="'.$v['title'].'"></span>
+                <span class="text input-group-sm"><input type="text" class="form-control " value="'.$v['title'].'"  data-id="'.$v['id'].'" data-parent="'.$v['parent'].'"></span>
                 <!-- Emphasis label -->
                 <small class="bg-green btn badge" data-action="add-sort-item"><i class="fa fa-plus"></i> 添加子分类</small>
                 <small class="bg-red btn badge" data-toggle="modal" data-target="#modal-default" data-action="deletethis"><i class="fa fa-trash-o"></i> 删除</small>';
  			if(isset($v['child'])){
  				$html .=$this->catehtml($v['child']);
-
  			}
  			$html =$html.'
               </dd>
@@ -236,6 +243,46 @@ class ProductController extends Controller{
 
  	}
 return $html ? '<div class="sortable-list">'.$html.'</div>':$html;
+
+ }
+ function catehtml1($data=array(),$uid=0,$a='&nbsp;&nbsp;&nbsp;𠃊'){
+ 		$html='';
+ 		foreach ($data as $k => $v) {
+ 			if($uid==$v['id']){
+ 				$selected='selected';
+ 			}else{
+ 				$selected='';
+ 			}
+
+ 		if($v['parent']==0){
+
+ 			$html .= '<option '.$selected.'  value="'.$v['id'].'">'.$v['title'];
+               if(isset($v['child'])){
+ 				$html .=$this->catehtml1($v['child'],$uid);
+ 			}
+ 			$html .='
+              </option>
+     ';
+ 				
+ 		}else{
+ 			if($uid==$v['id']){
+ 				$selected='selected';
+ 			}else{
+ 				$selected='';
+ 			}
+ 			$html .='
+            <option '.$selected.' value="'.$v['id'].'">'.$a.$v['title'];
+ 			if(isset($v['child'])){
+ 				$html .=$this->catehtml1($v['child'],$uid,'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$a);
+ 			}
+ 			$html =$html.'
+              </option>
+      ';
+ 			
+ 		}
+
+ 	}
+return $html?$html:$html;
 
  }
 function test($a=0,&$result=array()){
@@ -252,12 +299,11 @@ return $result;
 		if($info){
 		$re='';
 		if($b=='ajax_changestatus'){
+			$model = new ProductModel();
 			$data['conditions']['id']=$info['id'];
 			$data['datas']['istop']=$info['status'];
-			$model = new ProductModel();
 			$re = $model->updateData($data);
 			$data['callback'] = 'istop';						 //需要返回的字段
-			$model = new ProductModel();
 			$istop = $model->getData($data);
 			if($istop){
 				$res = '';
@@ -265,6 +311,28 @@ return $result;
 				$res['list'] = $istop;  //ajax返回数据
 				echo json_encode($res);
 			}
+		}
+		if($b=='ajax_changescates'){
+			$model = new ProductcateModel();
+			
+			foreach ($info['cates'] as $k => $v) {
+				$data['conditions']['id']=$v['id'];
+					$data['datas']['title']=$v['title'];
+					$data['datas']['parent']=$v['parent'];
+					$data['datas']['sort']=$v['sort'];
+				if($v['id']!=''){
+					$re = $model->updateData($data);
+				}else {
+					$re = $model->insertData($data);
+				}
+			}
+			//if($re){
+				$res['isok'] = 'ok';   //ajax返回状态
+				$res['list'] = $info['cates'];
+				echo json_encode($info['cates']);
+				//$data['conditions']
+			//}
+			
 		}
 	}
   }

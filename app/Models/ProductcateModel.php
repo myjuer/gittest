@@ -36,7 +36,7 @@ function checkData($data=array(),$type=1){    //1为重复验证 2为存在验�
 	}
 }
 
-public function getData($data,$method='1'){  //1为精确查询、2为模糊查询
+public function getData($data,$method='1',$orders='sort'){  //1为精确查询、2为模糊查询
 	if(!isset($data['conditions'])){
 		return $rs->get();
 	}
@@ -45,10 +45,10 @@ public function getData($data,$method='1'){  //1为精确查询、2为模糊查�
 		if($data['callback']!=''){
 			return $rs->pluck($data['callback'])->first();
 		}else{
-			return $rs->get();
+			return $rs->orderBy($orders,'asc')->get();
 		}
 	}else{
-		return $this ->get();
+		return $this->orderBy($orders,'asc')->get();
 	}
 }
 public function deleteData($data,$method='1'){  //1为精确查询、2为模糊查询

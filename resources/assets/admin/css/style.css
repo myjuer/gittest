@@ -87,7 +87,7 @@
 	height: 50% !important;
 
 }
-.layui-ext-class .layui-layer-title{background:rgba(0,0,0,0.6); color: #fff; border: none;}
+.layui-ext-class .layui-layer-title{background:#00a65a; color: #fff; border: none;}
 .layui-ext-class .layui-layer-min cite{background-color: #fff !important;}
 .layui-ext-class .layui-layer-max{background-position: -60px -40px !important; }
 .layui-ext-class .layui-layer-close{background-position: -12px -40px !important;}
